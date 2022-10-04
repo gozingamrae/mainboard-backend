@@ -22,7 +22,6 @@ public class AuthController {
 
     @PostMapping("/join")
     public ResponseEntity<ResponseDTO> join(@RequestBody MemberDTO memberDTO){
-        System.out.println("memberDTO = " + memberDTO);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED, "회원가입 성공", authService.join(memberDTO)));
     }
 
