@@ -34,6 +34,9 @@
           , MEMBER_NAME
           , EMAIL
           , PHONE
+          , GENDER
+          , JOB
+          , BIRTH_DATE_TIME
           , JOIN_DATE
           , WITHDRAWAL_MEMBER
           , HOLDING_POINT
@@ -47,6 +50,9 @@
           , #{memberName}
           , #{email}
           , #{phone}
+          , #{gender}
+          , #{job}
+          , #{birthDateTime}
           , to_date(sysdate,'yyyy.mm.dd hh24:mi')
           , 'N'
           , 0

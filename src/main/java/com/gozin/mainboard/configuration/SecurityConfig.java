@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .authorizeRequests()
                     .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                    .antMatchers("/v1/auth/**").permitAll()
+                    .antMatchers("/auth/**").permitAll()
                 .and()
                 .cors()
                 .disable()
