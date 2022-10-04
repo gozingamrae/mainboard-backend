@@ -1,0 +1,219 @@
+package com.gozin.mainboard.member.dto;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Date;
+
+public class MemberDTO implements UserDetails {
+
+    private Long memberCode;
+    private String memberId;
+    private String memberPwd;
+    private String memberName;
+    private String email;
+    private String phone;
+    private String gender;
+    private String job;
+    private java.util.Date birthDateTime;
+    private String loginLock;
+    private java.util.Date joinDate;
+    private String withdrawalMember;
+    private Long holdingPoint;
+    private Long addressCode;
+
+    public MemberDTO() {}
+
+    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, Date birthDateTime, String loginLock, Date joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, Collection<? extends GrantedAuthority> authorities) {
+        this.memberCode = memberCode;
+        this.memberId = memberId;
+        this.memberPwd = memberPwd;
+        this.memberName = memberName;
+        this.email = email;
+        this.phone = phone;
+        this.gender = gender;
+        this.job = job;
+        this.birthDateTime = birthDateTime;
+        this.loginLock = loginLock;
+        this.joinDate = joinDate;
+        this.withdrawalMember = withdrawalMember;
+        this.holdingPoint = holdingPoint;
+        this.addressCode = addressCode;
+        this.authorities = authorities;
+    }
+
+    public Long getMemberCode() {
+        return memberCode;
+    }
+
+    public void setMemberCode(Long memberCode) {
+        this.memberCode = memberCode;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getMemberPwd() {
+        return memberPwd;
+    }
+
+    public void setMemberPwd(String memberPwd) {
+        this.memberPwd = memberPwd;
+    }
+
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public Date getBirthDateTime() {
+        return birthDateTime;
+    }
+
+    public void setBirthDateTime(Date birthDateTime) {
+        this.birthDateTime = birthDateTime;
+    }
+
+    public String getLoginLock() {
+        return loginLock;
+    }
+
+    public void setLoginLock(String loginLock) {
+        this.loginLock = loginLock;
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public String getWithdrawalMember() {
+        return withdrawalMember;
+    }
+
+    public void setWithdrawalMember(String withdrawalMember) {
+        this.withdrawalMember = withdrawalMember;
+    }
+
+    public Long getHoldingPoint() {
+        return holdingPoint;
+    }
+
+    public void setHoldingPoint(Long holdingPoint) {
+        this.holdingPoint = holdingPoint;
+    }
+
+    public Long getAddressCode() {
+        return addressCode;
+    }
+
+    public void setAddressCode(Long addressCode) {
+        this.addressCode = addressCode;
+    }
+
+    public void setAuthorities( Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    private Collection<? extends GrantedAuthority> authorities;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.memberPwd;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.memberId;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberDTO{" +
+                "memberCode=" + memberCode +
+                ", memberId='" + memberId + '\'' +
+                ", memberPwd='" + memberPwd + '\'' +
+                ", memberName='" + memberName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", job='" + job + '\'' +
+                ", birthDateTime=" + birthDateTime +
+                ", loginLock='" + loginLock + '\'' +
+                ", joinDate=" + joinDate +
+                ", withdrawalMember='" + withdrawalMember + '\'' +
+                ", holdingPoint='" + holdingPoint + '\'' +
+                ", addressCode='" + addressCode + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
+}
