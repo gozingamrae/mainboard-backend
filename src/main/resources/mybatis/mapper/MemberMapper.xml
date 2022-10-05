@@ -2,7 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.gozin.mainboard.member.dao.MemberMapper">
+
+
 
     <select id="findByMemberId" resultType="MemberDTO">
         SELECT
@@ -24,6 +27,28 @@
          WHERE WITHDRAWAL_MEMBER = 'N'
            AND MEMBER_ID = #{memberId}
     </select>
+
+    <select id="findByEmail" resultType="MemberDTO">
+        SELECT
+            MEMBER_CODE
+             , MEMBER_ID
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , PHONE
+             , GENDER
+             , JOB
+             , BIRTH_DATE_TIME
+             , LOGIN_LOCK
+             , JOIN_DATE
+             , WITHDRAWAL_MEMBER
+             , HOLDING_POINT
+             , ADDRESS_CODE
+        FROM TB_MEMBER
+        WHERE WITHDRAWAL_MEMBER = 'N'
+          AND MEMBER_ID = #{email}
+    </select>
+
 
     <insert id="insertMember" parameterType="MemberDTO">
         INSERT INTO TB_MEMBER
@@ -50,9 +75,9 @@
           , #{memberName}
           , #{email}
           , #{phone}
-          , #{gender}
-          , #{job}
-          , #{birthDateTime}
+          , #{gender, jdbcType=VARCHAR}
+          , #{job, jdbcType=VARCHAR}
+          , #{birthDateTime, jdbcType=DATE}
           , to_date(sysdate,'yyyy.mm.dd hh24:mi')
           , 'N'
           , 0

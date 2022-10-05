@@ -7,6 +7,8 @@ import java.util.Optional;
 
 @Mapper
 public interface MemberMapper {
+    public MemberDTO findByEmail(String email);
+
     public int insertMember(MemberDTO memberDTO);
 
     Optional<MemberDTO> findByMemberId(String memberId);

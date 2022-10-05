@@ -24,9 +24,7 @@ public class AuthService {
 
     @Transactional
     public MemberDTO join(MemberDTO memberDTO) {
-
         // 이메일 중복 여부 추가
-
         memberDTO.setMemberPwd(passwordEncoder.encode(memberDTO.getMemberPwd()));
         int result = memberMapper.insertMember(memberDTO);
         return memberDTO;
