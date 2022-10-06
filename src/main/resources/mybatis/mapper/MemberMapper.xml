@@ -46,7 +46,7 @@
              , ADDRESS_CODE
         FROM TB_MEMBER
         WHERE WITHDRAWAL_MEMBER = 'N'
-          AND MEMBER_ID = #{email}
+          AND EMAIL = #{email}
     </select>
 
 
@@ -85,4 +85,26 @@
         )
 
     </insert>
+
+    <select id="findById" resultType="memberDTO">
+        SELECT
+               MEMBER_CODE
+             , EMAIL
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , PHONE
+             , GENDER
+             , JOB
+             , BIRTH_DATE_TIME
+             , LOGIN_LOCK
+             , JOIN_DATE
+             , WITHDRAWAL_MEMBER
+             , HOLDING_POINT
+             , ADDRESS_CODE
+        FROM TB_MEMBER
+        WHERE WITHDRAWAL_MEMBER = 'N'
+          AND MEMBER_ID = #{memberId}
+
+    </select>
 </mapper>

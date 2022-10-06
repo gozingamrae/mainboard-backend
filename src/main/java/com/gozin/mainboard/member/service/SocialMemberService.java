@@ -3,23 +3,20 @@ package com.gozin.mainboard.member.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gozin.mainboard.common.ResponseDTO;
 import com.gozin.mainboard.jwt.TokenProvider;
 import com.gozin.mainboard.member.dao.MemberMapper;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import com.gozin.mainboard.member.dto.SocialMemberDTO;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import com.gozin.mainboard.member.dto.TokenDTO;
+import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -36,17 +33,15 @@ public class SocialMemberService {
         this.tokenProvider = tokenProvider;
     }
 
-    public MemberDTO kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
+    public ResponseEntity<ResponseDTO> kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
         String accessToken = tokenProvider.getKakaoAccessToken(code);
         SocialMemberDTO member = getSocialMember(accessToken);
         MemberDTO kakaoMember = registerKakaoMember(member);
-//        kakaoMember.setAuthorities(tokenProvider.getAuthentication(accessToken));
-        return kakaoMember;
+//        TokenDTO token = tokenProvider.generateTokenDTO(kakaoMember);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "로그인 성공", accessToken ));
+
     }
 
-//    private Authentication forceLogin(MemberDTO kakaoMember) {
-//
-//    }
 
     public MemberDTO registerKakaoMember(SocialMemberDTO member) {
         String memberId = member.getMemberId();
@@ -66,7 +61,6 @@ public class SocialMemberService {
             newMember.setEmail(email);
             newMember.setMemberName(memberName);
             newMember.setPhone("Not Found");
-            System.out.println("newMemwwber = " + newMember);
             int insertResult = memberMapper.insertMember(newMember);
         }
         return newMember;
@@ -76,6 +70,7 @@ public class SocialMemberService {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer "+accessToken);
         headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+        headers.add("Access-Control-Allow-Origin", "*");
 
         HttpEntity<MultiValueMap<String, String>> socialMemberRequest = new HttpEntity<>(headers);
         System.out.println("socialMemberRequest = " + socialMemberRequest);

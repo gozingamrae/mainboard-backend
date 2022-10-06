@@ -12,4 +12,7 @@ public interface MemberMapper {
     public int insertMember(MemberDTO memberDTO);
 
     Optional<MemberDTO> findByMemberId(String memberId);
+
+    MemberDTO findById(String memberId);
+
 }
