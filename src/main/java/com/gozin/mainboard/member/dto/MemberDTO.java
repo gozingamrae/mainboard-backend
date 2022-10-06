@@ -7,6 +7,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
+/**
+ * <pre>
+ * Class : MemberDTO
+ * Comment:
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-01         이유리           최초 생성
+ * </pre>
+ *
+ * @author 이유리
+ * @version 1(클래스 버전)
+ * @see
+ */
+
 public class MemberDTO implements UserDetails {
 
     private Long memberCode;

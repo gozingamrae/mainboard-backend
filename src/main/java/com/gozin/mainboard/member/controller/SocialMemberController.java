@@ -18,6 +18,22 @@ import java.io.InputStream;
 import java.net.*;
 import java.util.HashMap;
 
+/**
+ * <pre>
+ * Class : SocialMemberController
+ * Comment: 소셜 로그인을 위한 컨트롤러
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-04         이유리           최초 생성
+ * </pre>
+ *
+ * @author 이유리
+ * @version 1(클래스 버전)
+ * @see
+ */
+
 @RestController
 @RequestMapping("/oauth")
 public class SocialMemberController {

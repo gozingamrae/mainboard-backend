@@ -1,5 +1,20 @@
 package com.gozin.mainboard.member.dto;
 
+/**
+ * <pre>
+ * Class : SocialMemberDTO
+ * Comment: 소셜 멤버 DTO
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-04         이유리           최초 생성
+ * </pre>
+ *
+ * @author 이유리
+ * @version 1(클래스 버전)
+ * @see
+ */
 public class SocialMemberDTO {
     private String memberId;
     private String email;
