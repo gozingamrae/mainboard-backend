@@ -10,10 +10,11 @@
 
     <typeAliases>
         <typeAlias type="com.gozin.mainboard.member.dto.MemberDTO" alias="MemberDTO"/>
-
+        <typeAlias type="com.gozin.mainboard.delivery.model.dto.DeliveryAddressDTO" alias="DeliveryAddressDTO"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="MemberMapper.xml"/>
+        <mapper resource="DeliveryAddressMapper.xml"/>
     </mappers>
 </configuration>
