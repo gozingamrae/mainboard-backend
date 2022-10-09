@@ -9,14 +9,14 @@ public class DeliveryAddressDTO {
     private String deliveryRecipient;
     private String defaultAddressYn;
     private String commonEntranceAccessNumberYn;
+
+    private String commonEntranceAccessNumber;
     private String deliveryLocation;
 
     public DeliveryAddressDTO() {
     }
 
-    public DeliveryAddressDTO(int addressCode, int memberCode, String addressName, String addressLocation,
-                              String addressPhone, String deliveryRecipient, String defaultAddressYn,
-                              String commonEntranceAccessNumberYn, String deliveryLocation) {
+    public DeliveryAddressDTO(int addressCode, int memberCode, String addressName, String addressLocation, String addressPhone, String deliveryRecipient, String defaultAddressYn, String commonEntranceAccessNumberYn, String commonEntranceAccessNumber, String deliveryLocation) {
         this.addressCode = addressCode;
         this.memberCode = memberCode;
         this.addressName = addressName;
@@ -25,6 +25,7 @@ public class DeliveryAddressDTO {
         this.deliveryRecipient = deliveryRecipient;
         this.defaultAddressYn = defaultAddressYn;
         this.commonEntranceAccessNumberYn = commonEntranceAccessNumberYn;
+        this.commonEntranceAccessNumber = commonEntranceAccessNumber;
         this.deliveryLocation = deliveryLocation;
     }
 
@@ -92,6 +93,14 @@ public class DeliveryAddressDTO {
         this.commonEntranceAccessNumberYn = commonEntranceAccessNumberYn;
     }
 
+    public String getCommonEntranceAccessNumber() {
+        return commonEntranceAccessNumber;
+    }
+
+    public void setCommonEntranceAccessNumber(String commonEntranceAccessNumber) {
+        this.commonEntranceAccessNumber = commonEntranceAccessNumber;
+    }
+
     public String getDeliveryLocation() {
         return deliveryLocation;
     }
@@ -111,6 +120,7 @@ public class DeliveryAddressDTO {
                 ", deliveryRecipient='" + deliveryRecipient + '\'' +
                 ", defaultAddressYn='" + defaultAddressYn + '\'' +
                 ", commonEntranceAccessNumberYn='" + commonEntranceAccessNumberYn + '\'' +
+                ", commonEntranceAccessNumber='" + commonEntranceAccessNumber + '\'' +
                 ", deliveryLocation='" + deliveryLocation + '\'' +
                 '}';
     }
