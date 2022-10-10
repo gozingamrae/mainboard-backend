@@ -22,6 +22,12 @@
                                , A.DEFAULT_RENTAL_FEE
                                , A.MANUFACTURING_COMPANY
                                , A.BRAND
+                               , A.S_RENTAL_FEE
+                               , A.A_RENTAL_FEE
+                               , A.B_RENTAL_FEE
+                               , A.S_STATE
+                               , A.A_STATE
+                               , A.B_STATE
                                , B.CATEGORY_NAME
                           FROM TB_BOARDGAME_TYPE A
                                    JOIN TB_BOARDGAME_CATEGORY B ON (A.BOARDGAME_CATEGORY_CODE = B.BOARDGAME_CATEGORY_CODE)
