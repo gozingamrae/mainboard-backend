@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * ----------------------------------------------------------------
  * 2022-10-08         이유리           최초 생성
  * 2022-10-08         이유리           update 메소드 생성
+ * 2022-10-10         이유리           회원탈퇴 메소드 생성
  * </pre>
  *
  * @author 이유리
@@ -41,5 +42,11 @@ public class MemberService {
     public MemberDTO findMemberById(String memberId) {
         MemberDTO member = memberMapper.findById(memberId);
         return member;
+    }
+
+    public int delete(String memberId) {
+        int result = memberMapper.deleteMember(memberId);
+
+        return result;
     }
 }

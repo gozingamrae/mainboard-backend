@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * 2022-10-08         이유리           최초 생성
  * 2022-10-08         이유리           회원 정보 update api 생성
  * 2022-10-08         이유리           회원 정보 조회 api 생성
+ * 2022-10-10         이유리           회원 탈퇴 api 생성
  * </pre>
  *
  * @author 이유리
@@ -47,6 +48,10 @@ public class MemberController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원정보 수정 성공", memberService.update(memberDTO)));
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDTO> delete(@RequestHeader String memberId){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 탈퇴 성공", memberService.delete(memberId)));
+    }
 
 
 }

@@ -34,16 +34,16 @@ public class MemberDTO implements UserDetails {
     private String phone;
     private String gender;
     private String job;
-    private String birthDateTime;
+    private java.util.Date birthDateTime;
     private String loginLock;
-    private String joinDate;
+    private java.util.Date  joinDate;
     private String withdrawalMember;
     private Long holdingPoint;
     private String memberRole;
 
     public MemberDTO() {}
 
-    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, String birthDateTime, String loginLock, String joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, String memberRole, Collection<? extends GrantedAuthority> authorities) {
+    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, Date birthDateTime, String loginLock, Date joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, String memberRole, Collection<? extends GrantedAuthority> authorities) {
         this.memberCode = memberCode;
         this.memberId = memberId;
         this.memberPwd = memberPwd;
@@ -125,11 +125,11 @@ public class MemberDTO implements UserDetails {
         this.job = job;
     }
 
-    public String getBirthDateTime() {
+    public Date getBirthDateTime() {
         return birthDateTime;
     }
 
-    public void setBirthDateTime(String birthDateTime) {
+    public void setBirthDateTime(Date birthDateTime) {
         this.birthDateTime = birthDateTime;
     }
 
@@ -141,11 +141,11 @@ public class MemberDTO implements UserDetails {
         this.loginLock = loginLock;
     }
 
-    public String getJoinDate() {
+    public Date getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(String joinDate) {
+    public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
 
