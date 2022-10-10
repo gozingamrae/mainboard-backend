@@ -19,10 +19,9 @@
              , JOB
              , BIRTH_DATE_TIME
              , LOGIN_LOCK
-             , JOIN_DATE
              , WITHDRAWAL_MEMBER
              , HOLDING_POINT
-             , ADDRESS_CODE
+             , MEMBER_ROLE
           FROM TB_MEMBER
          WHERE WITHDRAWAL_MEMBER = 'N'
            AND MEMBER_ID = #{memberId}
@@ -40,10 +39,9 @@
              , JOB
              , BIRTH_DATE_TIME
              , LOGIN_LOCK
-             , JOIN_DATE
              , WITHDRAWAL_MEMBER
              , HOLDING_POINT
-             , ADDRESS_CODE
+             , MEMBER_ROLE
         FROM TB_MEMBER
         WHERE WITHDRAWAL_MEMBER = 'N'
           AND EMAIL = #{email}
@@ -65,11 +63,10 @@
           , JOIN_DATE
           , WITHDRAWAL_MEMBER
           , HOLDING_POINT
-          , ADDRESS_CODE
         )
         VALUES
         (
-            SEQ_MEMBER_CODE.NEXTVAL
+            SEQ_TB_MEMBER_CODE.NEXTVAL
           , #{memberId}
           , #{memberPwd}
           , #{memberName}
@@ -78,10 +75,9 @@
           , #{gender, jdbcType=VARCHAR}
           , #{job, jdbcType=VARCHAR}
           , #{birthDateTime, jdbcType=DATE}
-          , to_date(sysdate,'yyyy.mm.dd hh24:mi')
+          , to_date(sysdate,'yyyy.mm.dd')
           , 'N'
           , 0
-          , 1
         )
 
     </insert>
@@ -98,13 +94,32 @@
              , JOB
              , BIRTH_DATE_TIME
              , LOGIN_LOCK
-             , JOIN_DATE
              , WITHDRAWAL_MEMBER
              , HOLDING_POINT
-             , ADDRESS_CODE
+             , MEMBER_ROLE
         FROM TB_MEMBER
         WHERE WITHDRAWAL_MEMBER = 'N'
           AND MEMBER_ID = #{memberId}
 
     </select>
+
+    <update id="updateMember">
+        UPDATE
+               TB_MEMBER A
+           SET A.PHONE = #{ phone }
+             , A.JOB = #{ job, jdbcType=VARCHAR }
+             , A.BIRTH_DATE_TIME = #{ birthDateTime, jdbcType=DATE }
+             , A.GENDER = #{ gender, jdbcType=VARCHAR}
+         WHERE A.MEMBER_ID = #{ memberId }
+    </update>
+
+
+
+    <update id="deleteMember">
+        UPDATE
+               TB_MEMBER A
+           SET A.WITHDRAWAL_MEMBER = 'Y'
+         WHERE A.MEMBER_ID = #{ memberId }
+    </update>
+
 </mapper>

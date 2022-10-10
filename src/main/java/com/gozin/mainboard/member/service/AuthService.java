@@ -41,7 +41,6 @@ public class AuthService {
 
     @Transactional
     public MemberDTO join(MemberDTO memberDTO) {
-        // 이메일 중복 여부 추가
 
         if(memberMapper.findById(memberDTO.getMemberId()) != null ){
             throw new DuplicatedMemberIdException("이미 가입된 아이디입니다!");

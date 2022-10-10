@@ -64,9 +64,13 @@ public class TokenProvider {
 
     public TokenDTO generateTokenDTO(MemberDTO member){
 
+        List<String> roles = Collections.singletonList(member.getMemberRole());
+
         Claims claims = Jwts
                 .claims()
                 .setSubject(member.getMemberId());
+
+        claims.put(AUTHORITIES_KEY, roles);
 
         long now = (new Date()).getTime();
 

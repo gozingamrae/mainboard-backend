@@ -15,7 +15,8 @@ import java.util.Date;
  * ================================================================
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
- * 2022-10-01         이유리           최초 생성
+ * 2022-10-01         이유리          최초 생성
+ * 2022-10-07         이유리          memberRole 컬럼 추가
  * </pre>
  *
  * @author 이유리
@@ -33,16 +34,16 @@ public class MemberDTO implements UserDetails {
     private String phone;
     private String gender;
     private String job;
-    private java.util.Date birthDateTime;
+    private String birthDateTime;
     private String loginLock;
-    private java.util.Date joinDate;
+    private String joinDate;
     private String withdrawalMember;
     private Long holdingPoint;
-    private Long addressCode;
+    private String memberRole;
 
     public MemberDTO() {}
 
-    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, Date birthDateTime, String loginLock, Date joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, Collection<? extends GrantedAuthority> authorities) {
+    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, String birthDateTime, String loginLock, String joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, String memberRole, Collection<? extends GrantedAuthority> authorities) {
         this.memberCode = memberCode;
         this.memberId = memberId;
         this.memberPwd = memberPwd;
@@ -56,7 +57,7 @@ public class MemberDTO implements UserDetails {
         this.joinDate = joinDate;
         this.withdrawalMember = withdrawalMember;
         this.holdingPoint = holdingPoint;
-        this.addressCode = addressCode;
+        this.memberRole = memberRole;
         this.authorities = authorities;
     }
 
@@ -124,11 +125,11 @@ public class MemberDTO implements UserDetails {
         this.job = job;
     }
 
-    public Date getBirthDateTime() {
+    public String getBirthDateTime() {
         return birthDateTime;
     }
 
-    public void setBirthDateTime(Date birthDateTime) {
+    public void setBirthDateTime(String birthDateTime) {
         this.birthDateTime = birthDateTime;
     }
 
@@ -140,11 +141,11 @@ public class MemberDTO implements UserDetails {
         this.loginLock = loginLock;
     }
 
-    public Date getJoinDate() {
+    public String getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(Date joinDate) {
+    public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
     }
 
@@ -164,15 +165,15 @@ public class MemberDTO implements UserDetails {
         this.holdingPoint = holdingPoint;
     }
 
-    public Long getAddressCode() {
-        return addressCode;
+    public String getMemberRole() {
+        return memberRole;
     }
 
-    public void setAddressCode(Long addressCode) {
-        this.addressCode = addressCode;
+    public void setMemberRole(String memberRole) {
+        this.memberRole = memberRole;
     }
 
-    public void setAuthorities( Collection<? extends GrantedAuthority> authorities) {
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
@@ -227,8 +228,8 @@ public class MemberDTO implements UserDetails {
                 ", loginLock='" + loginLock + '\'' +
                 ", joinDate=" + joinDate +
                 ", withdrawalMember='" + withdrawalMember + '\'' +
-                ", holdingPoint='" + holdingPoint + '\'' +
-                ", addressCode='" + addressCode + '\'' +
+                ", holdingPoint=" + holdingPoint +
+                ", memberRole='" + memberRole + '\'' +
                 ", authorities=" + authorities +
                 '}';
     }
