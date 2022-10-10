@@ -1,6 +1,7 @@
 package com.gozin.mainboard.product.dto;
 
 public class ProductDTO {
+    private int boardgameTypeCode;
     private int boardgameType;
     private String boardgameName;
     private String soldOutYn;
@@ -17,9 +18,29 @@ public class ProductDTO {
     private String BState;
     public ProductDTO(){}
 
-    public ProductDTO(int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee,
-                      String manufacturingCompany, String brand, String categoryName, int SRentalFee, int ARentalFee,
-                      int BRentalFee, String SState, String AState, String BState) {
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "boardgameTypeCode=" + boardgameTypeCode +
+                ", boardgameType=" + boardgameType +
+                ", boardgameName='" + boardgameName + '\'' +
+                ", soldOutYn='" + soldOutYn + '\'' +
+                ", totalCount=" + totalCount +
+                ", defaultRentalFee=" + defaultRentalFee +
+                ", manufacturingCompany='" + manufacturingCompany + '\'' +
+                ", brand='" + brand + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", SRentalFee=" + SRentalFee +
+                ", ARentalFee=" + ARentalFee +
+                ", BRentalFee=" + BRentalFee +
+                ", SState='" + SState + '\'' +
+                ", AState='" + AState + '\'' +
+                ", BState='" + BState + '\'' +
+                '}';
+    }
+
+    public ProductDTO(int boardgameTypeCode, int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee, String manufacturingCompany, String brand, String categoryName, int SRentalFee, int ARentalFee, int BRentalFee, String SState, String AState, String BState) {
+        this.boardgameTypeCode = boardgameTypeCode;
         this.boardgameType = boardgameType;
         this.boardgameName = boardgameName;
         this.soldOutYn = soldOutYn;
@@ -36,24 +57,12 @@ public class ProductDTO {
         this.BState = BState;
     }
 
-    @Override
-    public String toString() {
-        return "ProductDTO{" +
-                "boardgameType=" + boardgameType +
-                ", boardgameName='" + boardgameName + '\'' +
-                ", soldOutYn='" + soldOutYn + '\'' +
-                ", totalCount=" + totalCount +
-                ", defaultRentalFee=" + defaultRentalFee +
-                ", manufacturingCompany='" + manufacturingCompany + '\'' +
-                ", brand='" + brand + '\'' +
-                ", categoryName='" + categoryName + '\'' +
-                ", SRentalFee=" + SRentalFee +
-                ", ARentalFee=" + ARentalFee +
-                ", BRentalFee=" + BRentalFee +
-                ", SState='" + SState + '\'' +
-                ", AState='" + AState + '\'' +
-                ", BState='" + BState + '\'' +
-                '}';
+    public int getBoardgameTypeCode() {
+        return boardgameTypeCode;
+    }
+
+    public void setBoardgameTypeCode(int boardgameTypeCode) {
+        this.boardgameTypeCode = boardgameTypeCode;
     }
 
     public int getBoardgameType() {
@@ -88,11 +97,11 @@ public class ProductDTO {
         this.totalCount = totalCount;
     }
 
-    public int getdefaultRentalFee() {
+    public int getDefaultRentalFee() {
         return defaultRentalFee;
     }
 
-    public void setdefaultRentalFee(int defaultRentalFee) {
+    public void setDefaultRentalFee(int defaultRentalFee) {
         this.defaultRentalFee = defaultRentalFee;
     }
 
