@@ -60,4 +60,10 @@ public class ProductController {
     }
     //상품 상세조회(Paging)
 
+
+    //상품 체크리스트 조회
+    @GetMapping("products/checkList")
+    public ResponseEntity<ResponseDTO> selectCheckList(){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 입력 성공",  productService.selectCheckList()));
+    }
 }

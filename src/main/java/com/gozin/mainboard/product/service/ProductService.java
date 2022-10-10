@@ -30,5 +30,8 @@ public class ProductService {
     public Object insertProduct(ProductDTO productDTO){
         return productDTO;
     }
+    public Object selectCheckList(){
+        return productMapper.selectCheckList();
+    }
 
 }
