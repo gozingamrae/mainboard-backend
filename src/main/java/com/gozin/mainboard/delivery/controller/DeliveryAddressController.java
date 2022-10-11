@@ -44,7 +44,7 @@ public class DeliveryAddressController {
 
         System.out.println(deliveryAddressList);
 
-        return (ResponseEntity<ResponseDTO>) ResponseEntity
+        return ResponseEntity
                 .ok()
                 .headers(headers)
                 .body(new ResponseDTO(HttpStatus.OK, "success", deliveryAddressList));
@@ -69,7 +69,7 @@ public class DeliveryAddressController {
 
         System.out.println(deliveryAddress);
 
-        return (ResponseEntity<ResponseDTO>) ResponseEntity
+        return ResponseEntity
                 .ok()
                 .headers(headers)
                 .body(new ResponseDTO(HttpStatus.OK, "success", deliveryAddress));
@@ -81,7 +81,15 @@ public class DeliveryAddressController {
 
         System.out.println(request);
 
-        // 기본 배송지 회원 별로 1개만 되도록 바꿔야 한다.
+        int memberCode = 1;
+
+        if((String) request.get("defaultAddressYn") == "Y") {
+            DeliveryAddressDTO defaultAddress = deliveryAddressService.selectDefaultAddressByMemberCode(memberCode);
+            if(defaultAddress == null || defaultAddress.getDefaultAddressYn() == "Y") {
+                deliveryAddressService.cancelDefaultAddressByAddressCode(defaultAddress.getAddressCode());
+            }
+        }
+
         DeliveryAddressDTO deliveryAddress = new DeliveryAddressDTO();
         deliveryAddress.setAddressName((String) request.get("addressName"));
         deliveryAddress.setAddressPhone((String) request.get("addressPhone"));
@@ -115,10 +123,20 @@ public class DeliveryAddressController {
     @PutMapping("/addresses")
     public ResponseEntity<?> updateAddress(@RequestBody Map<String, Object> request) {
 
+        System.out.println(request.get("defaultAddressYn"));
 
-        System.out.println(request);
+        int memberCode = 1;
 
-        // 기본 배송지 회원 별로 1개만 되도록 바꿔야 한다.
+        if((String) request.get("defaultAddressYn") == "Y") {
+            DeliveryAddressDTO defaultAddress = deliveryAddressService.selectDefaultAddressByMemberCode(memberCode);
+            System.out.println("asasasas");
+            System.out.println("aaaaaa" + defaultAddress);
+            if(defaultAddress == null || defaultAddress.getDefaultAddressYn() == "Y") {
+                deliveryAddressService.cancelDefaultAddressByAddressCode(defaultAddress.getAddressCode());
+                System.out.println("bbb" + defaultAddress.getDefaultAddressYn());
+            }
+        }
+
         DeliveryAddressDTO deliveryAddress = new DeliveryAddressDTO();
         deliveryAddress.setAddressCode((Integer) request.get("addressCode"));
         deliveryAddress.setAddressName((String) request.get("addressName"));

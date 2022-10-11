@@ -17,6 +17,13 @@
           AND ADDRESS_CODE = #{ addressCode }
     </select>
 
+    <select id="selectDefaultAddressByMemberCode" resultType="DeliveryAddressDTO">
+        SELECT A.*
+          FROM TB_DELIVERY_ADDRESS A
+         WHERE MEMBER_CODE = 1
+           AND DEFAULT_ADDRESS_YN = 'Y'
+    </select>
+
     <insert id="insertAddress" parameterType="DeliveryAddressDTO">
         INSERT
           INTO TB_DELIVERY_ADDRESS A
@@ -60,6 +67,14 @@
              , A.COMMON_ENTRANCE_ACCESS_NUMBER = #{ commonEntranceAccessNumber }
              , A.DELIVERY_LOCATION = #{ deliveryLocation }
          WHERE A.ADDRESS_CODE = #{ addressCode }
+    </update>
+
+    <update id="cancelDefaultAddressByAddressCode" parameterType="int">
+        UPDATE
+            TB_DELIVERY_ADDRESS A
+        SET
+            A.DEFAULT_ADDRESS_YN = 'N'
+        WHERE A.ADDRESS_CODE = #{ addressCode }
     </update>
 
     <delete id="deleteDeliveryAddressByAddressCode" parameterType="_int">

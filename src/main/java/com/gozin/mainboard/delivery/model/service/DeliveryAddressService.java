@@ -28,6 +28,11 @@ public class DeliveryAddressService {
         return deliveryAddressMapper.selectAddressesByMemberCodeAndAddressCode(addressInfo);
     }
 
+    public DeliveryAddressDTO selectDefaultAddressByMemberCode(int memberCode) {
+
+        return deliveryAddressMapper.selectDefaultAddressByMemberCode(memberCode);
+    }
+
     @Transactional
     public boolean deleteDeliveryAddressByAddressCode(int addressCode) {
 
@@ -58,6 +63,19 @@ public class DeliveryAddressService {
     public boolean updateAddress(DeliveryAddressDTO deliveryAddress) {
 
         int result = deliveryAddressMapper.updateAddress(deliveryAddress);
+        System.out.println(result);
+
+        if(result == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Transactional
+    public boolean cancelDefaultAddressByAddressCode(int addressCode) {
+
+        int result = deliveryAddressMapper.cancelDefaultAddressByAddressCode(addressCode);
         System.out.println(result);
 
         if(result == 0) {

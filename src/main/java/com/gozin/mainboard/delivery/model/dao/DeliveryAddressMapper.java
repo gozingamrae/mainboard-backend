@@ -12,9 +12,13 @@ public interface DeliveryAddressMapper {
 
     DeliveryAddressDTO selectAddressesByMemberCodeAndAddressCode(Map<String, Integer> addressInfo);
 
+    DeliveryAddressDTO selectDefaultAddressByMemberCode(int memberCode);
+
     int insertAddress(DeliveryAddressDTO deliveryAddress);
 
     int deleteDeliveryAddressByAddressCode(int addressCode);
 
     int updateAddress(DeliveryAddressDTO deliveryAddress);
+
+    int cancelDefaultAddressByAddressCode(int addressCode);
 }
