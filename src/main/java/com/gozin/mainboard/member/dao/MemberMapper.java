@@ -32,4 +32,6 @@ public interface MemberMapper {
     int updateMember(MemberDTO memberDTO);
 
     int deleteMember(String memberId);
+
+    String findId(MemberDTO memberDTO);
 }
