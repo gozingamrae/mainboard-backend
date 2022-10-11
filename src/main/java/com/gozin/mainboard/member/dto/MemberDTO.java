@@ -7,6 +7,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 
+/**
+ * <pre>
+ * Class : MemberDTO
+ * Comment:
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-01         이유리          최초 생성
+ * 2022-10-07         이유리          memberRole 컬럼 추가
+ * </pre>
+ *
+ * @author 이유리
+ * @version 1(클래스 버전)
+ * @see
+ */
+
 public class MemberDTO implements UserDetails {
 
     private Long memberCode;
@@ -19,14 +36,14 @@ public class MemberDTO implements UserDetails {
     private String job;
     private java.util.Date birthDateTime;
     private String loginLock;
-    private java.util.Date joinDate;
+    private java.util.Date  joinDate;
     private String withdrawalMember;
     private Long holdingPoint;
-    private Long addressCode;
+    private String memberRole;
 
     public MemberDTO() {}
 
-    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, Date birthDateTime, String loginLock, Date joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, Collection<? extends GrantedAuthority> authorities) {
+    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, Date birthDateTime, String loginLock, Date joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, String memberRole, Collection<? extends GrantedAuthority> authorities) {
         this.memberCode = memberCode;
         this.memberId = memberId;
         this.memberPwd = memberPwd;
@@ -40,7 +57,7 @@ public class MemberDTO implements UserDetails {
         this.joinDate = joinDate;
         this.withdrawalMember = withdrawalMember;
         this.holdingPoint = holdingPoint;
-        this.addressCode = addressCode;
+        this.memberRole = memberRole;
         this.authorities = authorities;
     }
 
@@ -148,15 +165,15 @@ public class MemberDTO implements UserDetails {
         this.holdingPoint = holdingPoint;
     }
 
-    public Long getAddressCode() {
-        return addressCode;
+    public String getMemberRole() {
+        return memberRole;
     }
 
-    public void setAddressCode(Long addressCode) {
-        this.addressCode = addressCode;
+    public void setMemberRole(String memberRole) {
+        this.memberRole = memberRole;
     }
 
-    public void setAuthorities( Collection<? extends GrantedAuthority> authorities) {
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
@@ -211,8 +228,8 @@ public class MemberDTO implements UserDetails {
                 ", loginLock='" + loginLock + '\'' +
                 ", joinDate=" + joinDate +
                 ", withdrawalMember='" + withdrawalMember + '\'' +
-                ", holdingPoint='" + holdingPoint + '\'' +
-                ", addressCode='" + addressCode + '\'' +
+                ", holdingPoint=" + holdingPoint +
+                ", memberRole='" + memberRole + '\'' +
                 ", authorities=" + authorities +
                 '}';
     }

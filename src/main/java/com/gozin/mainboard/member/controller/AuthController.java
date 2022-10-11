@@ -10,8 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * <pre>
+ * Class : AuthController
+ * Comment: 권한 컨트롤러
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-01         이유리           최초 생성
+ * 2022-10-04         이유리           api 수정
+ * </pre>
+ *
+ * @author 이유리
+ * @version 1(클래스 버전)
+ * @see
+ */
+
 @RestController
-@RequestMapping("/v1/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
