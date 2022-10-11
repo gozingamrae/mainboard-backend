@@ -1,10 +1,13 @@
 package com.gozin.mainboard.member.controller;
 
 import com.gozin.mainboard.common.ResponseDTO;
+import com.gozin.mainboard.jwt.TokenProvider;
+import com.gozin.mainboard.member.dto.ChangePwdDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import com.gozin.mainboard.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
  * 2022-10-08         이유리           회원 정보 조회 api 생성
  * 2022-10-10         이유리           회원 탈퇴 api 생성
  * 2022-10-10         이유리           회원 아이디 찾기 api 생성
+ * 2022-10-11         이유리           회원 비밀번호 변경 api 생성
+ * 2022-10-12         이유리           회원 아이디 찾기 api 수정
  * </pre>
  *
  * @author 이유리
@@ -32,15 +37,13 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final MemberService memberService;
-
-
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService){
         this.memberService = memberService;
     }
 
     @GetMapping()
-    public ResponseEntity<ResponseDTO> findMemberById(@RequestHeader String memberId){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 정보 조회 성공", memberService.findMemberById(memberId)));
+    public ResponseEntity<ResponseDTO> findMemberById(@RequestHeader String accessToken){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 정보 조회 성공", memberService.findMemberById(accessToken)));
     }
 
     @PutMapping("/update")
@@ -50,13 +53,19 @@ public class MemberController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<ResponseDTO> delete(@RequestHeader String memberId){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 탈퇴 성공", memberService.delete(memberId)));
+    public ResponseEntity<ResponseDTO> delete(@RequestHeader String accessToken){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 탈퇴 성공", memberService.delete(accessToken)));
     }
 
     @PostMapping("/findId")
     public ResponseEntity<ResponseDTO> findId(@RequestBody MemberDTO memberDTO){
+        System.out.println("memberDTO = " + memberDTO);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "아이디 조회 성공", memberService.findId(memberDTO)));
+    }
+
+    @PutMapping("/findPwd")
+    public ResponseEntity<ResponseDTO> findPwd(@RequestBody ChangePwdDTO changePwdDTO){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 비밀번호 변경 성공", memberService.findPwd(changePwdDTO)));
     }
 
 }

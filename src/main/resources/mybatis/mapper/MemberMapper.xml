@@ -130,4 +130,11 @@
            AND A.PHONE = #{ phone }
     </select>
 
+    <update id="changePwd">
+        UPDATE
+               TB_MEMBER A
+           SET A.MEMBER_PWD = #{ memberPwd }
+         WHERE A.MEMBER_ID = #{ memberId }
+    </update>
+
 </mapper>

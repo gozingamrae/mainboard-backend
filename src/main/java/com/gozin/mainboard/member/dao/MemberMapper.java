@@ -1,5 +1,6 @@
 package com.gozin.mainboard.member.dao;
 
+import com.gozin.mainboard.member.dto.ChangePwdDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -34,4 +35,6 @@ public interface MemberMapper {
     int deleteMember(String memberId);
 
     String findId(MemberDTO memberDTO);
+
+    int changePwd(ChangePwdDTO changePwdDTO);
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+
 /**
  * <pre>
  * Class : AuthController
@@ -38,7 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<ResponseDTO> join(@RequestBody MemberDTO memberDTO){
+    public ResponseEntity<ResponseDTO> join(@RequestBody MemberDTO memberDTO) throws ParseException {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED, "회원가입 성공", authService.join(memberDTO)));
     }
 
