@@ -2,7 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.gozin.mainboard.member.dao.MemberMapper">
+
+
 
     <select id="findByMemberId" resultType="MemberDTO">
         SELECT
@@ -16,14 +19,34 @@
              , JOB
              , BIRTH_DATE_TIME
              , LOGIN_LOCK
-             , JOIN_DATE
              , WITHDRAWAL_MEMBER
              , HOLDING_POINT
-             , ADDRESS_CODE
+             , MEMBER_ROLE
           FROM TB_MEMBER
          WHERE WITHDRAWAL_MEMBER = 'N'
            AND MEMBER_ID = #{memberId}
     </select>
+
+    <select id="findByEmail" resultType="MemberDTO">
+        SELECT
+            MEMBER_CODE
+             , MEMBER_ID
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , PHONE
+             , GENDER
+             , JOB
+             , BIRTH_DATE_TIME
+             , LOGIN_LOCK
+             , WITHDRAWAL_MEMBER
+             , HOLDING_POINT
+             , MEMBER_ROLE
+        FROM TB_MEMBER
+        WHERE WITHDRAWAL_MEMBER = 'N'
+          AND EMAIL = #{email}
+    </select>
+
 
     <insert id="insertMember" parameterType="MemberDTO">
         INSERT INTO TB_MEMBER
@@ -40,24 +63,71 @@
           , JOIN_DATE
           , WITHDRAWAL_MEMBER
           , HOLDING_POINT
-          , ADDRESS_CODE
         )
         VALUES
         (
-            SEQ_MEMBER_CODE.NEXTVAL
+            SEQ_TB_MEMBER_CODE.NEXTVAL
           , #{memberId}
           , #{memberPwd}
           , #{memberName}
           , #{email}
           , #{phone}
-          , #{gender}
-          , #{job}
-          , #{birthDateTime}
-          , to_date(sysdate,'yyyy.mm.dd hh24:mi')
+          , #{gender, jdbcType=VARCHAR}
+          , #{job, jdbcType=VARCHAR}
+          , #{birthDateTime, jdbcType=DATE}
+          , to_date(sysdate,'yyyy.mm.dd')
           , 'N'
           , 0
-          , 1
         )
 
     </insert>
+
+    <select id="findById" resultType="memberDTO">
+        SELECT
+               MEMBER_CODE
+             , EMAIL
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , PHONE
+             , GENDER
+             , JOB
+             , BIRTH_DATE_TIME
+             , LOGIN_LOCK
+             , WITHDRAWAL_MEMBER
+             , HOLDING_POINT
+             , MEMBER_ROLE
+        FROM TB_MEMBER
+        WHERE WITHDRAWAL_MEMBER = 'N'
+          AND MEMBER_ID = #{memberId}
+
+    </select>
+
+    <update id="updateMember">
+        UPDATE
+               TB_MEMBER A
+           SET A.PHONE = #{ phone }
+             , A.JOB = #{ job, jdbcType=VARCHAR }
+             , A.BIRTH_DATE_TIME = #{ birthDateTime, jdbcType=DATE }
+             , A.GENDER = #{ gender, jdbcType=VARCHAR}
+         WHERE A.MEMBER_ID = #{ memberId }
+    </update>
+
+
+
+    <update id="deleteMember">
+        UPDATE
+               TB_MEMBER A
+           SET A.WITHDRAWAL_MEMBER = 'Y'
+         WHERE A.MEMBER_ID = #{ memberId }
+    </update>
+
+    <select id="findId"  resultType="string">
+        SELECT
+               A.MEMBER_ID
+          FROM TB_MEMBER A
+         WHERE A.MEMBER_NAME = #{ memberName }
+           AND A.PHONE = #{ phone }
+    </select>
+
 </mapper>

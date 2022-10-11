@@ -1,5 +1,8 @@
 package com.gozin.mainboard.jwt;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gozin.mainboard.exception.TokenException;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import com.gozin.mainboard.member.dto.TokenDTO;
@@ -7,21 +10,45 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletResponse;
 import java.security.Key;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * <pre>
+ * Class : TokenProvider
+ * Comment:
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-01         이유리           최초 생성
+ * </pre>
+ *
+ * @author 이유리
+ * @version 1(클래스 버전)
+ * @see
+ */
+
 @Component
 public class TokenProvider {
-
     private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "bearer";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
@@ -37,9 +64,13 @@ public class TokenProvider {
 
     public TokenDTO generateTokenDTO(MemberDTO member){
 
+        List<String> roles = Collections.singletonList(member.getMemberRole());
+
         Claims claims = Jwts
                 .claims()
                 .setSubject(member.getMemberId());
+
+        claims.put(AUTHORITIES_KEY, roles);
 
         long now = (new Date()).getTime();
 
@@ -102,4 +133,38 @@ public class TokenProvider {
             return e.getClaims();
         }
     }
+
+    public String getKakaoAccessToken(String code) throws JsonProcessingException {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+        
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("grant_type", "authorization_code");
+        body.add("client_id","dec28fd3dd5d81e0b10184358994c44c");
+        body.add("redirect_uri", "http://localhost:8080/oauth/kakao");
+        body.add("code", code);
+
+        HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(body, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        System.out.println("restTemplate = " + restTemplate);
+        ResponseEntity<String> response = restTemplate.exchange(
+                "https://kauth.kakao.com/oauth/token",
+                HttpMethod.POST,
+                kakaoTokenRequest,
+                String.class
+        );
+        System.out.println("response = " + response);
+        String responseBody = response.getBody();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(responseBody);
+        return jsonNode.get("access_token").asText();
+    }
+
+//    public Authentication forceLogin(MemberDTO member){
+//
+//        Authentication authentication = new UsernamePasswordAuthenticationToken(member, null, member.getAuthorities());
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        return authentication;
+//    }
+
 }
