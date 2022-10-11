@@ -1,10 +1,12 @@
 package com.gozin.mainboard.member.service;
 
+import com.gozin.mainboard.exception.ChangePwdFailedException;
 import com.gozin.mainboard.exception.DuplicatedMemberIdException;
 import com.gozin.mainboard.exception.FullInputMemberInfoException;
 import com.gozin.mainboard.exception.LoginFailedException;
 import com.gozin.mainboard.jwt.TokenProvider;
 import com.gozin.mainboard.member.dao.MemberMapper;
+import com.gozin.mainboard.member.dto.ChangePwdDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import com.gozin.mainboard.member.dto.TokenDTO;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,6 +57,7 @@ public class AuthService {
         }
 
         memberDTO.setMemberPwd(passwordEncoder.encode(memberDTO.getMemberPwd()));
+
         int result = memberMapper.insertMember(memberDTO);
         return memberDTO;
     }
@@ -73,4 +76,5 @@ public class AuthService {
 
         return token;
     }
+
 }
