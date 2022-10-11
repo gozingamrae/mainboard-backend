@@ -114,9 +114,12 @@
         FROM TB_REQUIRED_PARTS_LIST
     </select>
 
-    <select id="selectCheckList" resultMap="productResultMap">
+    <select id="selectDetailProductByProductCode"  parameterType="String" resultMap="productResultMap">
         SELECT * FROM TB_BOARDGAME_TYPE A
         JOIN TB_DETAIL_INSPECTION_CHECK_LIST B ON (A.BOARDGAME_TYPE_CODE = B.BOARDGAME_TYPE_CODE)
-        JOIN TB_REQUIRED_PARTS_LIST C ON (A.BOARDGAME_TYPE_CODE = C.BOARDGAME_TYPE_CODE)
+        WHERE A.BOARDGAME_TYPE_CODE = #{productCode}
+    </select>
+    <select id="selectRequiredPartListByProductId" resultType="RequiredPartDTO">
+        SELECT * FROM TB_REQUIRED_PARTS_LIST
     </select>
 </mapper>

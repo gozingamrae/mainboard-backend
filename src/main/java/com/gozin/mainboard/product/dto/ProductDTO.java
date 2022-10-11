@@ -18,9 +18,7 @@ public class ProductDTO {
     private String SState;
     private String AState;
     private String BState;
-
     private List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList;
-
     private List<RequiredPartDTO> requiredPartDTOList;
     public ProductDTO(){}
 

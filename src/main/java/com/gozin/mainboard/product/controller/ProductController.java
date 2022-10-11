@@ -36,6 +36,14 @@ public class ProductController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", responseDtoWithPaging));
     }
+
+    //상품 상세조회(Paging)
+    @GetMapping("/products/{productCode}")
+    public ResponseEntity<ResponseDTO> selectDetailProductByProductCode(@PathVariable String productCode){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 입력 성공",  productService.selectDetailProductByProductCode(productCode)));
+    }
+    
+    //상품 검색
     @PostMapping("/products/search")
     public ResponseEntity<ResponseDTO> selectProductListWithPagingByProductDTO(@RequestParam String offset, @RequestBody SearchProductDTO searchProductDTO) {
 
@@ -58,12 +66,5 @@ public class ProductController {
         System.out.println(productDTO);
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 입력 성공",  productService.insertProduct(productDTO)));
     }
-    //상품 상세조회(Paging)
 
-
-    //상품 체크리스트 조회
-    @GetMapping("products/checkList")
-    public ResponseEntity<ResponseDTO> selectCheckList(){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 입력 성공",  productService.selectCheckList()));
-    }
 }
