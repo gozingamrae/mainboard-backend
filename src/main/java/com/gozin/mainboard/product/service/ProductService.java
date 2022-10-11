@@ -6,6 +6,8 @@ import com.gozin.mainboard.product.dto.SearchProductDTO;
 import com.gozin.mainboard.product.dto.ProductDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
 
@@ -31,4 +33,12 @@ public class ProductService {
         return productDTO;
     }
 
+    public Object selectDetailProductByProductCode(String productCode){
+        System.out.println("call selectDatailProductByProductCode Service 1");
+        ProductDTO productDTO = productMapper.selectDetailProductByProductCode(productCode);
+
+        System.out.println("call selectDatailProductByProductCode Service 2");
+        productDTO.setRequiredPartDTOList(productMapper.selectRequiredPartListByProductId());
+        return productDTO;
+    }
 }

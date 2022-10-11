@@ -4,6 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gozin.mainboard.product.dao.ProductMapper">
 
+    <resultMap id="productResultMap" type="productDTO">
+        <id column="BOARDGAME_TYPE_CODE" property="boardgameTypeCode"/>
+        <result column="BOARDGAME_NAME" property="boardgameName"/>
+        <result column="SOLD_OUT_YN" property="soldOutYn"/>
+        <result column="TOTAL_COUNT" property="totalCount"/>
+        <result column="DEFAULT_RENTAL_FEE" property="defaultRentalFee"/>
+        <result column="MANUFACTURING_COMPANY" property="manufacturingCompany"/>
+        <result column="BRAND" property="brand"/>
+        <result column="TOTAL_COUNT" property="categoryName"/>
+        <result column="S_RENTAL_FEE" property="SRentalFee"/>
+        <result column="A_RENTAL_FEE" property="ARentalFee"/>
+        <result column="B_RENTAL_FEE" property="BRentalFee"/>
+        <result column="S_STATE" property="SState"/>
+        <result column="A_STATE" property="AState"/>
+        <result column="B_STATE" property="BState"/>
+        <collection property="detailInspectionCheckListDTOList" ofType="DetailInspectionCheckListDTO">
+            <id column="LIST_CODE" property="listCode"/>
+            <result column="BOARDGAME_TYPE_CODE" property="boardgameTypeCode"/>
+            <result column="CHECK_CONTENT" property="checkContent"/>
+        </collection>
+
+    </resultMap>
+
+
     <select id="selectProductListWithPaging" parameterType="SelectCriteria" resultType="ProductDTO">
         <![CDATA[
          SELECT
@@ -38,7 +62,6 @@
             AND RN >= #{ startRow }
         ]]>
     </select>
-
 
     <select id="selectProductListWithPagingByProductDTO" parameterType="HashMap" resultType="ProductDTO">
         <![CDATA[
@@ -79,10 +102,24 @@
         ]]>
     </select>
 
-
     <select id="selectProductTotal" resultType="int">
         SELECT
             count(*)
         FROM TB_BOARDGAME_TYPE
+    </select>
+
+    <select id="selectRequiredPartsList" resultType="RequiredPartDTO">
+        SELECT
+            *
+        FROM TB_REQUIRED_PARTS_LIST
+    </select>
+
+    <select id="selectDetailProductByProductCode"  parameterType="String" resultMap="productResultMap">
+        SELECT * FROM TB_BOARDGAME_TYPE A
+        JOIN TB_DETAIL_INSPECTION_CHECK_LIST B ON (A.BOARDGAME_TYPE_CODE = B.BOARDGAME_TYPE_CODE)
+        WHERE A.BOARDGAME_TYPE_CODE = #{productCode}
+    </select>
+    <select id="selectRequiredPartListByProductId" resultType="RequiredPartDTO">
+        SELECT * FROM TB_REQUIRED_PARTS_LIST
     </select>
 </mapper>

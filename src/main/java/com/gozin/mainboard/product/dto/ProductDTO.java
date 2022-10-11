@@ -1,5 +1,7 @@
 package com.gozin.mainboard.product.dto;
 
+import java.util.List;
+
 public class ProductDTO {
     private int boardgameTypeCode;
     private int boardgameType;
@@ -16,7 +18,29 @@ public class ProductDTO {
     private String SState;
     private String AState;
     private String BState;
+    private List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList;
+    private List<RequiredPartDTO> requiredPartDTOList;
     public ProductDTO(){}
+
+    public ProductDTO(int boardgameTypeCode, int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee, String manufacturingCompany, String brand, String categoryName, int SRentalFee, int ARentalFee, int BRentalFee, String SState, String AState, String BState, List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList, List<RequiredPartDTO> requiredPartDTOList) {
+        this.boardgameTypeCode = boardgameTypeCode;
+        this.boardgameType = boardgameType;
+        this.boardgameName = boardgameName;
+        this.soldOutYn = soldOutYn;
+        this.totalCount = totalCount;
+        this.defaultRentalFee = defaultRentalFee;
+        this.manufacturingCompany = manufacturingCompany;
+        this.brand = brand;
+        this.categoryName = categoryName;
+        this.SRentalFee = SRentalFee;
+        this.ARentalFee = ARentalFee;
+        this.BRentalFee = BRentalFee;
+        this.SState = SState;
+        this.AState = AState;
+        this.BState = BState;
+        this.detailInspectionCheckListDTOList = detailInspectionCheckListDTOList;
+        this.requiredPartDTOList = requiredPartDTOList;
+    }
 
     @Override
     public String toString() {
@@ -36,25 +60,9 @@ public class ProductDTO {
                 ", SState='" + SState + '\'' +
                 ", AState='" + AState + '\'' +
                 ", BState='" + BState + '\'' +
+                ", detailInspectionCheckListDTOList=" + detailInspectionCheckListDTOList +
+                ", requiredPartDTOList=" + requiredPartDTOList +
                 '}';
-    }
-
-    public ProductDTO(int boardgameTypeCode, int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee, String manufacturingCompany, String brand, String categoryName, int SRentalFee, int ARentalFee, int BRentalFee, String SState, String AState, String BState) {
-        this.boardgameTypeCode = boardgameTypeCode;
-        this.boardgameType = boardgameType;
-        this.boardgameName = boardgameName;
-        this.soldOutYn = soldOutYn;
-        this.totalCount = totalCount;
-        this.defaultRentalFee = defaultRentalFee;
-        this.manufacturingCompany = manufacturingCompany;
-        this.brand = brand;
-        this.categoryName = categoryName;
-        this.SRentalFee = SRentalFee;
-        this.ARentalFee = ARentalFee;
-        this.BRentalFee = BRentalFee;
-        this.SState = SState;
-        this.AState = AState;
-        this.BState = BState;
     }
 
     public int getBoardgameTypeCode() {
@@ -176,4 +184,21 @@ public class ProductDTO {
     public void setBState(String BState) {
         this.BState = BState;
     }
+
+    public List<DetailInspectionCheckListDTO> getDetailInspectionCheckListDTOList() {
+        return detailInspectionCheckListDTOList;
+    }
+
+    public void setDetailInspectionCheckListDTOList(List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList) {
+        this.detailInspectionCheckListDTOList = detailInspectionCheckListDTOList;
+    }
+
+    public List<RequiredPartDTO> getRequiredPartDTOList() {
+        return requiredPartDTOList;
+    }
+
+    public void setRequiredPartDTOList(List<RequiredPartDTO> requiredPartDTOList) {
+        this.requiredPartDTOList = requiredPartDTOList;
+    }
 }
+
