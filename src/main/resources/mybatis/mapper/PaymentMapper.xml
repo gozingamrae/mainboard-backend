@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gozin.mainboard.payment.dao.PaymentMapper">
+
+    <select id="selectPaymentList" resultType="PaymentDTO">
+        SELECT PAYMENT_KEY,
+               ORDER_ID,
+               AMOUNT,
+               PAYMENT_DATE
+          FROM TB_PAYMENT_HISTORY
+    </select>
+
+    <insert id="insertPaymentList" parameterType="PaymentDTO">
+        INSERT INTO TB_PAYMENT_HISTORY
+        (
+         PAYMENT_KEY,
+         ORDER_ID,
+         AMOUNT,
+         PAYMENT_DATE
+        )
+        VALUES
+        (
+         #{paymentKey},
+         #{orderId},
+         #{amount},
+         #{paymentDate}
+        )
+
+    </insert>
+
+
+</mapper>

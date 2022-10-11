@@ -10,10 +10,14 @@
 
     <typeAliases>
         <typeAlias type="com.gozin.mainboard.member.dto.MemberDTO" alias="MemberDTO"/>
+        <typeAlias type="com.gozin.mainboard.payment.dto.PaymentDTO" alias="PaymentDTO"/>
+        <typeAlias type="com.gozin.mainboard.order.dto.OrderDTO" alias="OrderDTO"/>
 
     </typeAliases>
 
     <mappers>
         <mapper resource="MemberMapper.xml"/>
+        <mapper resource="PaymentMapper.xml"/>
+        <mapper resource="OrderMapper.xml"/>
     </mappers>
 </configuration>
