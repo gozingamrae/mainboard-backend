@@ -122,4 +122,12 @@
          WHERE A.MEMBER_ID = #{ memberId }
     </update>
 
+    <select id="findId"  resultType="string">
+        SELECT
+               A.MEMBER_ID
+          FROM TB_MEMBER A
+         WHERE A.MEMBER_NAME = #{ memberName }
+           AND A.PHONE = #{ phone }
+    </select>
+
 </mapper>
