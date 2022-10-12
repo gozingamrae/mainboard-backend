@@ -77,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/auth/**").permitAll()
                     .antMatchers("/members/**").permitAll()
                     .antMatchers("/**").hasAnyRole("ROLE_MEMBER", "ROLE_MEMBER")
+                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .and()
                 .cors()
                 .disable()
