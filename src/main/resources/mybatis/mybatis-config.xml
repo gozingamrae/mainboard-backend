@@ -11,6 +11,8 @@
 
     <typeAliases>
         <typeAlias type="com.gozin.mainboard.member.dto.MemberDTO" alias="MemberDTO"/>
+        <typeAlias type="com.gozin.mainboard.coupon.dto.CouponDTO" alias="CouponDTO"/>
+        <typeAlias type="com.gozin.mainboard.coupon.dto.SearchCouponDTO" alias="SearchCouponDTO"/>
         <typeAlias type="com.gozin.mainboard.payment.dto.PaymentDTO" alias="PaymentDTO"/>
         <typeAlias type="com.gozin.mainboard.order.dto.OrderDTO" alias="OrderDTO"/>
         <typeAlias type="com.gozin.mainboard.delivery.model.dto.DeliveryDTO" alias="DeliveryDTO"/>
@@ -19,6 +21,7 @@
 
     <mappers>
         <mapper resource="MemberMapper.xml"/>
+        <mapper resource="CouponMapper.xml"/>
         <mapper resource="PaymentMapper.xml"/>
         <mapper resource="OrderMapper.xml"/>
         <mapper resource="DeliveryMapper.xml"/>

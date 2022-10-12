@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gozin.mainboard.coupon.dao.CouponMapper">
+    <insert id="insertCoupon" parameterType="CouponDTO">
+        INSERT INTO TB_COUPON
+        (
+         COUPON_CODE
+        , COUPON_NAME
+        , EXPLANATION
+        , EXPIRATION_PERIOD
+        , MIN_ORDER_PRICE
+        , DISCOUNT_RATE
+        , TARGET
+        )
+        VALUES
+            (
+                SEQ_TB_COUPON_CODE.NEXTVAL
+            , #{couponName}
+            , #{explanation}
+            , #{expirationPeriod}
+            , #{minOrderPrice}
+            , #{discountRate}
+            , #{target}
+            )
+    </insert>
+    <select id="searchCoupon" resultType="CouponDTO" parameterType="SearchCouponDTO">
+        SELECT
+            COUPON_CODE
+             , COUPON_NAME
+             , EXPLANATION
+             , EXPIRATION_PERIOD
+             , MIN_ORDER_PRICE
+             , DISCOUNT_RATE
+             , TARGET
+        FROM TB_COUPON
+        WHERE COUPON_NAME = #{couponName}
+          AND TARGET = #{target}
+          AND EXPIRATION_PERIOD BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+    <delete id="deleteCoupon" parameterType="CouponDTO">
+        DELETE FROM TB_COUPON WHERE COUPON_CODE = #{couponCode}
+    </delete>
+</mapper>
