@@ -61,15 +61,17 @@ public class ProductController {
 
     //상품 등록
     @PostMapping("/products")
-    public ResponseEntity<ResponseDTO> insertProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ResponseDTO> insertProduct(@ModelAttribute ProductDTO productDTO) {
         System.out.println(productDTO);
+        System.out.println("hello");
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 등록 성공",  productService.insertProduct(productDTO)));
-    }
+}
 
     //상품 수정
     @PutMapping("/products/{productCode}")
     public ResponseEntity<ResponseDTO> updateProduct(@PathVariable String productCode, @RequestBody ProductDTO productDTO) {
         System.out.println(productDTO);
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 수정 성공",  productService.insertProduct(productDTO)));
+        productService.insertProduct(productDTO);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 수정 성공",  true));
     }
 }

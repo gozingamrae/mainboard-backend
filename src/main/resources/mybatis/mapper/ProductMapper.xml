@@ -39,20 +39,7 @@
                        , P.*
                  FROM (
                           SELECT
-                              A.BOARDGAME_TYPE_CODE
-                               , A.BOARDGAME_NAME
-                               , A.SOLD_OUT_YN
-                               , A.TOTAL_COUNT
-                               , A.DEFAULT_RENTAL_FEE
-                               , A.MANUFACTURING_COMPANY
-                               , A.BRAND
-                               , A.S_RENTAL_FEE
-                               , A.A_RENTAL_FEE
-                               , A.B_RENTAL_FEE
-                               , A.S_STATE
-                               , A.A_STATE
-                               , A.B_STATE
-                               , B.CATEGORY_NAME
+                              *
                           FROM TB_BOARDGAME_TYPE A
                                    JOIN TB_BOARDGAME_CATEGORY B ON (A.BOARDGAME_CATEGORY_CODE = B.BOARDGAME_CATEGORY_CODE)
                           ORDER BY BOARDGAME_TYPE_CODE
@@ -74,20 +61,7 @@
                      , P.*
                 FROM (
                          SELECT
-                             A.BOARDGAME_TYPE_CODE
-                              , A.BOARDGAME_NAME
-                              , A.SOLD_OUT_YN
-                              , A.TOTAL_COUNT
-                              , A.DEFAULT_RENTAL_FEE
-                              , A.MANUFACTURING_COMPANY
-                              , A.BRAND
-                              , A.S_RENTAL_FEE
-                              , A.A_RENTAL_FEE
-                              , A.B_RENTAL_FEE
-                              , A.S_STATE
-                              , A.A_STATE
-                              , A.B_STATE
-                              , B.CATEGORY_NAME
+                             *
                          FROM TB_BOARDGAME_TYPE A
                          JOIN TB_BOARDGAME_CATEGORY B ON (A.BOARDGAME_CATEGORY_CODE = B.BOARDGAME_CATEGORY_CODE)
                          WHERE A.BOARDGAME_TYPE_CODE = #{searchProductDTO.boardgameTypeCode, jdbcType=VARCHAR}
@@ -122,4 +96,45 @@
     <select id="selectRequiredPartListByProductId" resultType="RequiredPartDTO">
         SELECT * FROM TB_REQUIRED_PARTS_LIST
     </select>
+
+
+    <insert id="insertProduct" parameterType="ProductDTO">
+        INSERT INTO TB_BOARDGAME_TYPE(
+          BOARDGAME_TYPE_CODE
+        , BOARDGAME_NAME
+        , SOLD_OUT_YN
+        , TOTAL_COUNT
+        , DEFAULT_RENTAL_FEE
+        , S_RENTAL_FEE
+        , A_RENTAL_FEE
+        , B_RENTAL_FEE
+        , S_STATE
+        , A_STATE
+        , B_STATE
+        , MANUFACTURING_COMPANY
+        , BRAND
+        , BOARDGAME_CATEGORY_CODE
+        , STORAGE
+        , PRODUCT_IMAGE_URL
+
+        )
+        VALUES(
+        SEQ_BOARDGAME_TYPE_CODE.NEXTVAL,
+         #{boardgameName},
+         'N',
+         0,
+         #{defaultRentalFee},
+          #{SRentalFee},
+          #{ARentalFee},
+         #{BRentalFee},
+         '판매중',
+         '판매중',
+         '판매중',
+         #{brand},
+         #{manufacturingCompany},
+         #{categoryCode},
+         #{storage},
+         #{productImageUrl}
+         )
+    </insert>
 </mapper>
