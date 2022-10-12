@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
  * 2022-10-10         이유리           회원 아이디 찾기 api 생성
  * 2022-10-11         이유리           회원 비밀번호 변경 api 생성
  * 2022-10-12         이유리           회원 아이디 찾기 api 수정
+ * 2022-10-12         이유리           전체 회원 조회 api 생성
  * </pre>
  *
  * @author 이유리
@@ -48,7 +49,6 @@ public class MemberController {
 
     @PutMapping("/update")
     public ResponseEntity<ResponseDTO> update(@RequestBody MemberDTO memberDTO){
-
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원정보 수정 성공", memberService.update(memberDTO)));
     }
 
@@ -63,9 +63,14 @@ public class MemberController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "아이디 조회 성공", memberService.findId(memberDTO)));
     }
 
-    @PutMapping("/findPwd")
+    @PutMapping("/changePwd")
     public ResponseEntity<ResponseDTO> findPwd(@RequestBody ChangePwdDTO changePwdDTO){
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 비밀번호 변경 성공", memberService.findPwd(changePwdDTO)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 비밀번호 변경 성공", memberService.changePwd(changePwdDTO)));
+    }
+
+    @GetMapping("/lists")
+    public ResponseEntity<ResponseDTO> findMemberAll (){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 목록 조회 성공", memberService.findMemberAll()));
     }
 
 }

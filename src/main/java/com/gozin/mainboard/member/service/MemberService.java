@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * <pre>
  * Class : MemberService
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * 2022-10-10         이유리           회원 아이디 찾기 메소드 생성
  * 2022-10-11         이유리           회원 비밀번호 수정 메소드 생성
  * 2022-10-12         이유리           회원 아이디 찾기 메소드 수정
+ * 2022-10-12         이유리           전체 회원 조회 메소드 생성
  * </pre>
  *
  * @author 이유리
@@ -68,7 +71,7 @@ public class MemberService {
         return memberId;
     }
     @Transactional
-    public int findPwd(ChangePwdDTO changePwdDTO) {
+    public int changePwd(ChangePwdDTO changePwdDTO) {
 
         MemberDTO member = memberMapper.findByMemberId(changePwdDTO.getMemberId())
                 .orElseThrow(() -> new ChangePwdFailedException("회원 비밀번호 변경을 진행할 수 없습니다. "));
@@ -81,5 +84,11 @@ public class MemberService {
         int result = memberMapper.changePwd(changePwdDTO);
 
         return result;
+    }
+
+    public List<MemberDTO> findMemberAll() {
+        List<MemberDTO> members = memberMapper.findMemberAll();
+
+        return members;
     }
 }

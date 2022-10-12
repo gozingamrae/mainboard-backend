@@ -137,4 +137,21 @@
          WHERE A.MEMBER_ID = #{ memberId }
     </update>
 
+    <select id="findMemberAll" resultType="MemberDTO">
+        SELECT
+               MEMBER_CODE
+             , MEMBER_ID
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , PHONE
+             , GENDER
+             , JOB
+             , BIRTH_DATE_TIME
+             , LOGIN_LOCK
+             , WITHDRAWAL_MEMBER
+             , HOLDING_POINT
+             , MEMBER_ROLE
+        FROM TB_MEMBER
+    </select>
 </mapper>

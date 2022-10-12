@@ -160,11 +160,5 @@ public class TokenProvider {
         return jsonNode.get("access_token").asText();
     }
 
-//    public Authentication forceLogin(MemberDTO member){
-//
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(member, null, member.getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        return authentication;
-//    }
 
 }
