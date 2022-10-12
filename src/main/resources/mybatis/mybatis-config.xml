@@ -10,10 +10,13 @@
 
     <typeAliases>
         <typeAlias type="com.gozin.mainboard.member.dto.MemberDTO" alias="MemberDTO"/>
-
+        <typeAlias type="com.gozin.mainboard.coupon.dto.CouponDTO" alias="CouponDTO"/>
+        <typeAlias type="com.gozin.mainboard.coupon.dto.SearchCouponDTO" alias="SearchCouponDTO"/>
     </typeAliases>
 
     <mappers>
         <mapper resource="MemberMapper.xml"/>
+        <mapper resource="CouponMapper.xml"/>
+
     </mappers>
 </configuration>
