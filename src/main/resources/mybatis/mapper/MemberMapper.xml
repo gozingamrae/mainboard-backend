@@ -137,4 +137,49 @@
          WHERE A.MEMBER_ID = #{ memberId }
     </update>
 
+    <select id="findMemberAll" resultType="MemberDTO">
+        SELECT
+               MEMBER_CODE
+             , MEMBER_ID
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , PHONE
+             , GENDER
+             , JOB
+             , JOIN_DATE
+             , BIRTH_DATE_TIME
+             , LOGIN_LOCK
+             , WITHDRAWAL_MEMBER
+             , HOLDING_POINT
+             , MEMBER_ROLE
+        FROM TB_MEMBER
+    </select>
+
+    <insert id="registBlacklist" parameterType="blacklistDTO">
+        INSERT INTO TB_BLACKLIST
+        (
+          BLACKLIST_CODE
+        , MEMBER_ID
+        , REGISTRATION_DATE
+        , DESCRIPTION
+        )
+        VALUES
+        (
+          SEQ_TB_BLACKLIST_CODE.NEXTVAL
+        , #{ memberId }
+        , to_date(sysdate,'yyyy.mm.dd')
+        , #{ description }
+        )
+
+    </insert>
+
+    <select id="selectBlacklist" resultType="BlacklistDTO">
+        SELECT
+               BLACKLIST_CODE
+             , MEMBER_ID
+             , REGISTRATION_DATE
+             , DESCRIPTION
+        FROM TB_BLACKLIST
+    </select>
 </mapper>

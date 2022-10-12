@@ -1,9 +1,11 @@
 package com.gozin.mainboard.member.dao;
 
+import com.gozin.mainboard.member.dto.BlacklistDTO;
 import com.gozin.mainboard.member.dto.ChangePwdDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Optional;
 /**
  * <pre>
@@ -37,4 +39,10 @@ public interface MemberMapper {
     String findId(MemberDTO memberDTO);
 
     int changePwd(ChangePwdDTO changePwdDTO);
+
+    List<MemberDTO> findMemberAll();
+
+    int registBlacklist(BlacklistDTO blacklistDTO);
+
+    List<BlacklistDTO> selectBlacklist();
 }
