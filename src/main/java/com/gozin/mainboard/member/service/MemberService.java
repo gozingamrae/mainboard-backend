@@ -3,6 +3,7 @@ package com.gozin.mainboard.member.service;
 import com.gozin.mainboard.exception.ChangePwdFailedException;
 import com.gozin.mainboard.jwt.TokenProvider;
 import com.gozin.mainboard.member.dao.MemberMapper;
+import com.gozin.mainboard.member.dto.BlacklistDTO;
 import com.gozin.mainboard.member.dto.ChangePwdDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +27,7 @@ import java.util.List;
  * 2022-10-11         이유리           회원 비밀번호 수정 메소드 생성
  * 2022-10-12         이유리           회원 아이디 찾기 메소드 수정
  * 2022-10-12         이유리           전체 회원 조회 메소드 생성
+ * 2022-10-12         이유리           블랙리스트 조회, 등록 메소드 생성
  * </pre>
  *
  * @author 이유리
@@ -90,5 +92,17 @@ public class MemberService {
         List<MemberDTO> members = memberMapper.findMemberAll();
 
         return members;
+    }
+
+    @Transactional
+    public int registBlacklist(BlacklistDTO blacklistDTO) {
+        System.out.println("blacklistDTO = " + blacklistDTO);
+        int result = memberMapper.registBlacklist(blacklistDTO);
+        return result;
+    }
+
+    public List<BlacklistDTO> selectBlacklist() {
+        List<BlacklistDTO> blacklist = memberMapper.selectBlacklist();
+        return blacklist;
     }
 }
