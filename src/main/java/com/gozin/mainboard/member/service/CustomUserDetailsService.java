@@ -11,6 +11,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
+/**
+ * <pre>
+ * Class : CustomUserDetailService
+ * Comment:
+ * History
+ * ================================================================
+ * DATE             AUTHOR           NOTE
+ * ----------------------------------------------------------------
+ * 2022-10-01         이유리           최초 생성
+ * </pre>
+ *
+ * @author 이유리
+ * @version 1(클래스 버전)
+ * @see
+ */
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -28,7 +44,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     private MemberDTO addAuthorities(MemberDTO member) {
-        member.setAuthorities(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+        member.setAuthorities(Arrays.asList(new SimpleGrantedAuthority(member.getMemberRole())));
         return member;
     }
 }

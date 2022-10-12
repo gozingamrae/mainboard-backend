@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gozin.mainboard.delivery.model.dao.DeliveryAddressMapper">
+
+    <select id="selectAddressesByMemberCode" resultType="DeliveryAddressDTO">
+        SELECT A.*
+          FROM TB_DELIVERY_ADDRESS A
+         WHERE MEMBER_CODE = 1
+    </select>
+
+    <select id="selectAddressesByMemberCodeAndAddressCode" resultType="DeliveryAddressDTO">
+        SELECT A.*
+        FROM TB_DELIVERY_ADDRESS A
+        WHERE MEMBER_CODE = 1
+          AND ADDRESS_CODE = #{ addressCode }
+    </select>
+
+    <select id="selectDefaultAddressByMemberCode" resultType="DeliveryAddressDTO">
+        SELECT A.*
+          FROM TB_DELIVERY_ADDRESS A
+         WHERE MEMBER_CODE = 1
+           AND DEFAULT_ADDRESS_YN = 'Y'
+    </select>
+
+    <insert id="insertAddress" parameterType="DeliveryAddressDTO">
+        INSERT
+          INTO TB_DELIVERY_ADDRESS A
+             (
+               A.ADDRESS_CODE
+             , A.MEMBER_CODE
+             , A.ADDRESS_NAME
+             , A.ADDRESS_LOCATION
+             , A.ADDRESS_PHONE
+             , A.DELIVERY_RECIPIENT
+             , A.DEFAULT_ADDRESS_YN
+             , A.COMMON_ENTRANCE_ACCESS_NUMBER_YN
+             , A.COMMON_ENTRANCE_ACCESS_NUMBER
+             , A.DELIVERY_LOCATION
+             )
+        VALUES
+             (
+               SEQ_TB_DELIVERY_ADDRESS.NEXTVAL
+             , 1
+             , #{ addressName }
+             , #{ addressLocation }
+             , #{ addressPhone }
+             , #{ deliveryRecipient }
+             , #{ defaultAddressYn }
+             , #{ commonEntranceAccessNumberYn }
+             , #{ commonEntranceAccessNumber }
+             , #{ deliveryLocation }
+             )
+    </insert>
+
+    <update id="updateAddress" parameterType="DeliveryAddressDTO">
+        UPDATE
+               TB_DELIVERY_ADDRESS A
+           SET
+               A.ADDRESS_NAME = #{ addressName }
+             , A.ADDRESS_LOCATION =#{ addressLocation }
+             , A.ADDRESS_PHONE = #{ addressPhone }
+             , A.DELIVERY_RECIPIENT = #{ deliveryRecipient }
+             , A.DEFAULT_ADDRESS_YN =  #{ defaultAddressYn }
+             , A.COMMON_ENTRANCE_ACCESS_NUMBER_YN = #{ commonEntranceAccessNumberYn }
+             , A.COMMON_ENTRANCE_ACCESS_NUMBER = #{ commonEntranceAccessNumber }
+             , A.DELIVERY_LOCATION = #{ deliveryLocation }
+         WHERE A.ADDRESS_CODE = #{ addressCode }
+    </update>
+
+    <update id="cancelDefaultAddressByAddressCode" parameterType="int">
+        UPDATE
+            TB_DELIVERY_ADDRESS A
+        SET
+            A.DEFAULT_ADDRESS_YN = 'N'
+        WHERE A.ADDRESS_CODE = #{ addressCode }
+    </update>
+
+    <delete id="deleteDeliveryAddressByAddressCode" parameterType="_int">
+        DELETE
+          FROM TB_DELIVERY_ADDRESS
+         WHERE ADDRESS_CODE = #{ addressCode }
+    </delete>
+
+</mapper>
