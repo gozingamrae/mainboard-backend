@@ -206,10 +206,10 @@
          WHERE
         <trim prefixOverrides="AND">
             <if test='memberId != null or memberId ==  "" ' >
-               MEMBER_ID = #{ memberId }
+               MEMBER_ID LIKE '%' ||#{ memberId }|| '%'
             </if>
             <if test='memberName != null or memberName ==  "" '>
-               AND MEMBER_NAME = #{ memberName }
+               AND MEMBER_NAME LIKE '%' ||#{ memberName }|| '%'
             </if>
             <if test='withdrawalMember != null or withdrawalMember ==  "" '>
                AND WITHDRAWAL_MEMBER = #{ withdrawalMember }
