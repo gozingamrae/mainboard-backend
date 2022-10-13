@@ -17,6 +17,15 @@ public interface ProductMapper {
 
     public ProductDTO selectDetailProductByProductCode(String productCode);
     public List<RequiredPartDTO>selectRequiredPartListByProductId();
+
+    //상품 이름으로 상품 리스트 조회
+    public List<ProductDTO> selectProductListByProductName(String productName);
+
     //상품 입력
     public int insertProduct(ProductDTO productDTO);
+
+    //상품별 검수 목록 입력
+    public int insertCheckList(int productCode);
+    //상품별 필수 부품 입력
+    public int insertPartsList(int productCode);
 }

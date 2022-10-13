@@ -46,7 +46,9 @@ public class ProductService {
     public Object selectProductListWithPagingByProductDTO(SelectCriteria selectCriteria, SearchProductDTO searchProductDTO){
         return productMapper.selectProductListWithPagingByProductDTO(selectCriteria, searchProductDTO);
     }
-
+    public Object selectProductListByProductName(String productName){
+        return productMapper.selectProductListByProductName(productName);
+    }
 
     public Object selectDetailProductByProductCode(String productCode){
         ProductDTO productDTO = productMapper.selectDetailProductByProductCode(productCode);
@@ -78,6 +80,9 @@ public class ProductService {
             productDto.setProductDetailImageUrl(replaceDetailFileName);
             
             result = productMapper.insertProduct(productDto);
+
+            productMapper.insertCheckList(productDto.getBoardgameTypeCode());
+            productMapper.insertPartsList(productDto.getBoardgameTypeCode());
         } catch (IOException e) {
             FileUploadUtils.deleteFile(IMAGE_DIR, replaceFileName);
             FileUploadUtils.deleteFile(IMAGE_DIR, replaceDetailFileName);
