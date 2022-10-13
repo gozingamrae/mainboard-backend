@@ -82,7 +82,7 @@
 
     </insert>
 
-    <select id="findById" resultType="memberDTO">
+    <select id="findById" resultType="MemberDTO">
         SELECT
                MEMBER_CODE
              , EMAIL
@@ -97,6 +97,7 @@
              , WITHDRAWAL_MEMBER
              , HOLDING_POINT
              , MEMBER_ROLE
+             , BLACKLIST_MEMBER
         FROM TB_MEMBER
         WHERE WITHDRAWAL_MEMBER = 'N'
           AND MEMBER_ID = #{memberId}
@@ -153,6 +154,7 @@
              , WITHDRAWAL_MEMBER
              , HOLDING_POINT
              , MEMBER_ROLE
+             , BLACKLIST_MEMBER
         FROM TB_MEMBER
     </select>
 
@@ -180,6 +182,41 @@
              , MEMBER_ID
              , REGISTRATION_DATE
              , DESCRIPTION
-        FROM TB_BLACKLIST
+          FROM TB_BLACKLIST
+    </select>
+
+    <select id="selectMembersByCondition" resultType="MemberDTO">
+        SELECT
+               MEMBER_CODE
+             , MEMBER_ID
+             , MEMBER_PWD
+             , MEMBER_NAME
+             , EMAIL
+             , PHONE
+             , GENDER
+             , JOB
+             , JOIN_DATE
+             , BIRTH_DATE_TIME
+             , LOGIN_LOCK
+             , WITHDRAWAL_MEMBER
+             , HOLDING_POINT
+             , MEMBER_ROLE
+             , BLACKLIST_MEMBER
+          FROM TB_MEMBER
+         WHERE
+        <trim prefixOverrides="AND">
+            <if test='memberId != null or memberId ==  "" ' >
+               MEMBER_ID = #{ memberId }
+            </if>
+            <if test='memberName != null or memberName ==  "" '>
+               AND MEMBER_NAME = #{ memberName }
+            </if>
+            <if test='withdrawalMember != null or withdrawalMember ==  "" '>
+               AND WITHDRAWAL_MEMBER = #{ withdrawalMember }
+            </if>
+            <if test='joinDate != null or joinDate ==  "" '>
+               AND JOIN_DATE = #{ joinDate }
+            </if>
+        </trim>
     </select>
 </mapper>

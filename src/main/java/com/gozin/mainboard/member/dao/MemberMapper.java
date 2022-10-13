@@ -2,6 +2,7 @@ package com.gozin.mainboard.member.dao;
 
 import com.gozin.mainboard.member.dto.BlacklistDTO;
 import com.gozin.mainboard.member.dto.ChangePwdDTO;
+import com.gozin.mainboard.member.dto.ConditionDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -45,4 +46,6 @@ public interface MemberMapper {
     int registBlacklist(BlacklistDTO blacklistDTO);
 
     List<BlacklistDTO> selectBlacklist();
+
+    List<MemberDTO> selectMembersByCondition(ConditionDTO condition);
 }

@@ -40,10 +40,11 @@ public class MemberDTO implements UserDetails {
     private String withdrawalMember;
     private Long holdingPoint;
     private String memberRole;
+    private String blacklistMember;
 
     public MemberDTO() {}
 
-    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, Date birthDateTime, String loginLock, Date joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, String memberRole, Collection<? extends GrantedAuthority> authorities) {
+    public MemberDTO(Long memberCode, String memberId, String memberPwd, String memberName, String email, String phone, String gender, String job, Date birthDateTime, String loginLock, Date joinDate, String withdrawalMember, Long holdingPoint, Long addressCode, String memberRole, String blacklistMember, Collection<? extends GrantedAuthority> authorities) {
         this.memberCode = memberCode;
         this.memberId = memberId;
         this.memberPwd = memberPwd;
@@ -58,6 +59,7 @@ public class MemberDTO implements UserDetails {
         this.withdrawalMember = withdrawalMember;
         this.holdingPoint = holdingPoint;
         this.memberRole = memberRole;
+        this.blacklistMember = blacklistMember;
         this.authorities = authorities;
     }
 
@@ -169,6 +171,14 @@ public class MemberDTO implements UserDetails {
         return memberRole;
     }
 
+    public String getBlacklistMember() {
+        return blacklistMember;
+    }
+
+    public void setBlacklistMember(String blacklistMember) {
+        this.blacklistMember = blacklistMember;
+    }
+
     public void setMemberRole(String memberRole) {
         this.memberRole = memberRole;
     }
@@ -230,6 +240,7 @@ public class MemberDTO implements UserDetails {
                 ", withdrawalMember='" + withdrawalMember + '\'' +
                 ", holdingPoint=" + holdingPoint +
                 ", memberRole='" + memberRole + '\'' +
+                ", blacklistMember='" + blacklistMember + '\'' +
                 ", authorities=" + authorities +
                 '}';
     }
