@@ -2,6 +2,7 @@ package com.gozin.mainboard.order.service;
 
 import com.gozin.mainboard.order.dao.OrderMapper;
 import com.gozin.mainboard.order.dto.OrderDTO;
+import com.gozin.mainboard.order.dto.OrderSearchDTO;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +65,22 @@ public class OrderService {
         todayCondition = yyyyMMdd.format(today);
         System.out.println(orderId);
         return orderId;
+    }
+
+    public Object selectOrderByOrderId(OrderSearchDTO orderSearchDTO) {
+        String text = orderSearchDTO.getText();
+
+        System.out.println("TEXT ; " + text);
+
+        List<OrderDTO> selectOrderByOrderId = orderMapper.selectOrderByOrderId(text);
+
+        return selectOrderByOrderId;
+    }
+
+    public Object insertOrderInfo(OrderDTO orderDTO) {
+
+       int insertOrderInfo = orderMapper.insertOrderInfo(orderDTO);
+
+       return (insertOrderInfo>0) ? "입력 성공!" : "입력 실패ㅜ";
     }
 }
