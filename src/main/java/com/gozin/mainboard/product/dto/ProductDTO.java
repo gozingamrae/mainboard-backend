@@ -1,5 +1,7 @@
 package com.gozin.mainboard.product.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public class ProductDTO {
@@ -10,7 +12,14 @@ public class ProductDTO {
     private int totalCount;
     private int defaultRentalFee;
     private String manufacturingCompany;
+    private int boardgameCategoryCode;
     private String brand;
+    private MultipartFile productImage;
+    private String productImageUrl;
+
+    private MultipartFile productDetailImage;
+    private String productDetailImageUrl;
+    private int categoryCode;
     private String categoryName;
     private int SRentalFee;
     private int ARentalFee;
@@ -18,29 +27,7 @@ public class ProductDTO {
     private String SState;
     private String AState;
     private String BState;
-    private List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList;
-    private List<RequiredPartDTO> requiredPartDTOList;
-    public ProductDTO(){}
-
-    public ProductDTO(int boardgameTypeCode, int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee, String manufacturingCompany, String brand, String categoryName, int SRentalFee, int ARentalFee, int BRentalFee, String SState, String AState, String BState, List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList, List<RequiredPartDTO> requiredPartDTOList) {
-        this.boardgameTypeCode = boardgameTypeCode;
-        this.boardgameType = boardgameType;
-        this.boardgameName = boardgameName;
-        this.soldOutYn = soldOutYn;
-        this.totalCount = totalCount;
-        this.defaultRentalFee = defaultRentalFee;
-        this.manufacturingCompany = manufacturingCompany;
-        this.brand = brand;
-        this.categoryName = categoryName;
-        this.SRentalFee = SRentalFee;
-        this.ARentalFee = ARentalFee;
-        this.BRentalFee = BRentalFee;
-        this.SState = SState;
-        this.AState = AState;
-        this.BState = BState;
-        this.detailInspectionCheckListDTOList = detailInspectionCheckListDTOList;
-        this.requiredPartDTOList = requiredPartDTOList;
-    }
+    private String storage;
 
     @Override
     public String toString() {
@@ -52,7 +39,13 @@ public class ProductDTO {
                 ", totalCount=" + totalCount +
                 ", defaultRentalFee=" + defaultRentalFee +
                 ", manufacturingCompany='" + manufacturingCompany + '\'' +
+                ", boardgameCategoryCode=" + boardgameCategoryCode +
                 ", brand='" + brand + '\'' +
+                ", productImage=" + productImage +
+                ", productImageUrl='" + productImageUrl + '\'' +
+                ", productDetailImage=" + productDetailImage +
+                ", productDetailImageUrl='" + productDetailImageUrl + '\'' +
+                ", categoryCode=" + categoryCode +
                 ", categoryName='" + categoryName + '\'' +
                 ", SRentalFee=" + SRentalFee +
                 ", ARentalFee=" + ARentalFee +
@@ -60,9 +53,99 @@ public class ProductDTO {
                 ", SState='" + SState + '\'' +
                 ", AState='" + AState + '\'' +
                 ", BState='" + BState + '\'' +
+                ", storage='" + storage + '\'' +
                 ", detailInspectionCheckListDTOList=" + detailInspectionCheckListDTOList +
                 ", requiredPartDTOList=" + requiredPartDTOList +
                 '}';
+    }
+
+    public ProductDTO(int boardgameTypeCode, int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee, String manufacturingCompany, int boardgameCategoryCode, String brand, MultipartFile productImage, String productImageUrl, MultipartFile productDetailImage, String productDetailImageUrl, int categoryCode, String categoryName, int SRentalFee, int ARentalFee, int BRentalFee, String SState, String AState, String BState, String storage, List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList, List<RequiredPartDTO> requiredPartDTOList) {
+        this.boardgameTypeCode = boardgameTypeCode;
+        this.boardgameType = boardgameType;
+        this.boardgameName = boardgameName;
+        this.soldOutYn = soldOutYn;
+        this.totalCount = totalCount;
+        this.defaultRentalFee = defaultRentalFee;
+        this.manufacturingCompany = manufacturingCompany;
+        this.boardgameCategoryCode = boardgameCategoryCode;
+        this.brand = brand;
+        this.productImage = productImage;
+        this.productImageUrl = productImageUrl;
+        this.productDetailImage = productDetailImage;
+        this.productDetailImageUrl = productDetailImageUrl;
+        this.categoryCode = categoryCode;
+        this.categoryName = categoryName;
+        this.SRentalFee = SRentalFee;
+        this.ARentalFee = ARentalFee;
+        this.BRentalFee = BRentalFee;
+        this.SState = SState;
+        this.AState = AState;
+        this.BState = BState;
+        this.storage = storage;
+        this.detailInspectionCheckListDTOList = detailInspectionCheckListDTOList;
+        this.requiredPartDTOList = requiredPartDTOList;
+    }
+
+    public MultipartFile getProductDetailImage() {
+        return productDetailImage;
+    }
+
+    public void setProductDetailImage(MultipartFile productDetailImage) {
+        this.productDetailImage = productDetailImage;
+    }
+
+    public String getProductDetailImageUrl() {
+        return productDetailImageUrl;
+    }
+
+    public void setProductDetailImageUrl(String productDetailImageUrl) {
+        this.productDetailImageUrl = productDetailImageUrl;
+    }
+
+    public int getBoardgameCategoryCode() {
+        return boardgameCategoryCode;
+    }
+
+    public void setBoardgameCategoryCode(int boardgameCategoryCode) {
+        this.boardgameCategoryCode = boardgameCategoryCode;
+    }
+
+
+    public String getProductImageUrl() {
+        return productImageUrl;
+    }
+
+    public void setProductImageUrl(String productImageUrl) {
+        this.productImageUrl = productImageUrl;
+    }
+
+    public MultipartFile getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(MultipartFile productImage) {
+        this.productImage = productImage;
+    }
+
+    public int getCategoryCode() {
+        return categoryCode;
+    }
+
+    public void setCategoryCode(int categoryCode) {
+        this.categoryCode = categoryCode;
+    }
+
+    private List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList;
+    private List<RequiredPartDTO> requiredPartDTOList;
+    public ProductDTO(){}
+
+
+    public String getStorage() {
+        return storage;
+    }
+
+    public void setStorage(String storage) {
+        this.storage = storage;
     }
 
     public int getBoardgameTypeCode() {

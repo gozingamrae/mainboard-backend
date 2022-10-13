@@ -7,6 +7,22 @@ spring:
     url: jdbc:oracle:thin:@metaverse.ohgiraffers.com:1521/xe
     username: C##GOZIN
     password: GOZIN
+  web:
+    resources:
+      static-locations: classpath:/productimgs/
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+# 이미지 저장할 위치와 응답할 때 이미지 주소 세팅
+image:
+  # WebConfig에 세팅
+  add-resource-locations: classpath:/static/productimgs/
+  add-resource-handler: /productimgs/**
+  # ProductService에 세팅
+  image-dir: src/main/resources/static/productimgs
+  image-url: http://localhost:8080/productimgs/
+
 
 jwt:
   secret: asdfjp298pafo1320efqw0udvnh0er0h412r08byfdq9dsvh02143908hfeqwn80fdqs0nfdqs0n412013rq0nqefn08dfas0das730732g86923
