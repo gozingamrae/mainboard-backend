@@ -9,5 +9,30 @@
           FROM TB_ORDER
     </select>
 
+    <select id="selectOrderByOrderId" parameterType="OrderSearchDTO" resultType="OrderDTO">
+        SELECT *
+          FROM TB_ORDER
+         WHERE ORDER_ID LIKE '%'||#{ text }||'%'
+    </select>
+
+    <insert id="insertOrderInfo" parameterType="orderDTO">
+        INSERT INTO TB_ORDER
+        VALUES
+        (
+         #{orderId},
+         #{orderAmount},
+         #{couponUsedRate},
+         #{pointsUsedAmount},
+         #{orderDate},
+         #{selectedProduct},
+         #{memberCode},
+         #{paymentMethod},
+         #{deliveryCharge},
+         #{usedCouponCode},
+         #{deliveryStartYn},
+         #{finalOrderAmount}
+        )
+    </insert>
+
 </mapper>
 

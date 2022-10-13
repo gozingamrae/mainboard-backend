@@ -17,43 +17,63 @@ package com.gozin.mainboard.order.dto;
  */
 public class OrderDTO {
 
-    private String orderCode;
+    private String orderId;
     private int orderAmount;
-    private int couponUsedAmount;
+    private int couponUsedRate;
     private int pointsUsedAmount;
     private String orderDate;
-    private String whetherPay;
+    private int selectedProduct;
+    private String memberCode;
+    private String paymentMethod;
+    private int deliveryCharge;
+    private String usedCouponCode;
+    private char deliveryStartYn;
+    private int finalOrderAmount;
+    public OrderDTO() {
+    }
 
-    public OrderDTO() {}
-
-    public OrderDTO(String orderCode, int orderAmount, int couponUsedAmount,
-                    int pointsUsedAmount, String orderDate, String whetherPay) {
-        this.orderCode = orderCode;
+    public OrderDTO(String orderId, int orderAmount, int couponUsedRate,
+                    int pointsUsedAmount, String orderDate, int selectedProduct,
+                    String memberCode, String paymentMethod, int deliveryCharge,
+                    String usedCouponCode, char deliveryStartYn, int finalOrderAmount) {
+        this.orderId = orderId;
         this.orderAmount = orderAmount;
-        this.couponUsedAmount = couponUsedAmount;
+        this.couponUsedRate = couponUsedRate;
         this.pointsUsedAmount = pointsUsedAmount;
         this.orderDate = orderDate;
-        this.whetherPay = whetherPay;
+        this.selectedProduct = selectedProduct;
+        this.memberCode = memberCode;
+        this.paymentMethod = paymentMethod;
+        this.deliveryCharge = deliveryCharge;
+        this.usedCouponCode = usedCouponCode;
+        this.deliveryStartYn = deliveryStartYn;
+        this.finalOrderAmount = finalOrderAmount;
     }
 
     @Override
     public String toString() {
         return "OrderDTO{" +
-                "orderCode='" + orderCode + '\'' +
+                "orderId='" + orderId + '\'' +
                 ", orderAmount=" + orderAmount +
-                ", couponUsedAmount=" + couponUsedAmount +
+                ", couponUsedRate=" + couponUsedRate +
                 ", pointsUsedAmount=" + pointsUsedAmount +
                 ", orderDate='" + orderDate + '\'' +
-                ", whetherPay='" + whetherPay + '\'' +
+                ", selectedProduct=" + selectedProduct +
+                ", memberCode='" + memberCode + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", deliveryCharge=" + deliveryCharge +
+                ", usedCouponCode='" + usedCouponCode + '\'' +
+                ", deliveryStartYn=" + deliveryStartYn +
+                ", finalOrderAmount=" + finalOrderAmount +
                 '}';
     }
 
-    public String getOrderCode() {
-        return orderCode;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public int getOrderAmount() {
@@ -64,12 +84,12 @@ public class OrderDTO {
         this.orderAmount = orderAmount;
     }
 
-    public int getCouponUsedAmount() {
-        return couponUsedAmount;
+    public int getCouponUsedRate() {
+        return couponUsedRate;
     }
 
-    public void setCouponUsedAmount(int couponUsedAmount) {
-        this.couponUsedAmount = couponUsedAmount;
+    public void setCouponUsedRate(int couponUsedRate) {
+        this.couponUsedRate = couponUsedRate;
     }
 
     public int getPointsUsedAmount() {
@@ -88,14 +108,59 @@ public class OrderDTO {
         this.orderDate = orderDate;
     }
 
-    public String getWhetherPay() {
-        return whetherPay;
+    public int getSelectedProduct() {
+        return selectedProduct;
     }
 
-    public void setWhetherPay(String whetherPay) {
-        this.whetherPay = whetherPay;
+    public void setSelectedProduct(int selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    public String getMemberCode() {
+        return memberCode;
+    }
+
+    public void setMemberCode(String memberCode) {
+        this.memberCode = memberCode;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public int getDeliveryCharge() {
+        return deliveryCharge;
+    }
+
+    public void setDeliveryCharge(int deliveryCharge) {
+        this.deliveryCharge = deliveryCharge;
+    }
+
+    public String getUsedCouponCode() {
+        return usedCouponCode;
+    }
+
+    public void setUsedCouponCode(String usedCouponCode) {
+        this.usedCouponCode = usedCouponCode;
+    }
+
+    public char getDeliveryStartYn() {
+        return deliveryStartYn;
+    }
+
+    public void setDeliveryStartYn(char deliveryStartYn) {
+        this.deliveryStartYn = deliveryStartYn;
+    }
+
+    public int getFinalOrderAmount() {
+        return finalOrderAmount;
+    }
+
+    public void setFinalOrderAmount(int finalOrderAmount) {
+        this.finalOrderAmount = finalOrderAmount;
     }
 }
-
-
-
