@@ -5,6 +5,7 @@ import com.gozin.mainboard.jwt.TokenProvider;
 import com.gozin.mainboard.member.dao.MemberMapper;
 import com.gozin.mainboard.member.dto.BlacklistDTO;
 import com.gozin.mainboard.member.dto.ChangePwdDTO;
+import com.gozin.mainboard.member.dto.ConditionDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ import java.util.List;
  * 2022-10-12         이유리           회원 아이디 찾기 메소드 수정
  * 2022-10-12         이유리           전체 회원 조회 메소드 생성
  * 2022-10-12         이유리           블랙리스트 조회, 등록 메소드 생성
+ * 2022-10-13         이유리           회원 검색 조회 메소드 생성
  * </pre>
  *
  * @author 이유리
@@ -105,4 +107,10 @@ public class MemberService {
         List<BlacklistDTO> blacklist = memberMapper.selectBlacklist();
         return blacklist;
     }
-}
+
+    public List<MemberDTO> selectMembersByCondition(ConditionDTO condition) {
+        System.out.println("condition = " + condition);
+        List<MemberDTO> members = memberMapper.selectMembersByCondition(condition);
+        return members;
+    }
+ }
