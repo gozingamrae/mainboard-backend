@@ -4,13 +4,12 @@ import com.gozin.mainboard.common.ResponseDTO;
 import com.gozin.mainboard.common.paging.Pagenation;
 import com.gozin.mainboard.common.paging.ResponseDtoWithPaging;
 import com.gozin.mainboard.common.paging.SelectCriteria;
+import com.gozin.mainboard.inventory.dto.BoardgameStockDTO;
 import com.gozin.mainboard.inventory.service.InventoryService;
+import com.gozin.mainboard.product.dto.ProductDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -33,5 +32,11 @@ public class InventoryController {
         responseDtoWithPaging.setData(inventoryService.selectInventoryListWithPaging(selectCriteria));
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "조회 성공", responseDtoWithPaging));
+    }
+
+    @PostMapping("/inventorys")
+    public ResponseEntity<ResponseDTO> insertInventory(@ModelAttribute BoardgameStockDTO boardgameStockDTO) {
+        System.out.println(boardgameStockDTO);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 등록 성공",  inventoryService.insertInventory(boardgameStockDTO)));
     }
 }

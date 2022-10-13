@@ -13,4 +13,5 @@ public interface InventoryMapper {
 
     public List<BoardgameStockDTO> selectInventoryListWithPaging(SelectCriteria selectCriteria);
 
+    public int insertInventory(BoardgameStockDTO boardgameStockDTO);
 }

@@ -32,4 +32,9 @@
             count(*)
         FROM TB_BOARDGAME_STOCK
     </select>
+
+    <insert id="insertInventory" parameterType="BoardgameStockDTO">
+        INSERT INTO TB_BOARDGAME_STOCK VALUES (SEQ_BOARDGAME_STOCK_SERIAL_CODE.NEXTVAL, #{boardgameTypeCode}, 'A1', '창고',#{ratingCode})
+    </insert>
+
 </mapper>
