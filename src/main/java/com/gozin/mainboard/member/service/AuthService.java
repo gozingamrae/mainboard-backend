@@ -44,6 +44,10 @@ public class AuthService {
     @Transactional
     public MemberDTO join(MemberDTO memberDTO) {
 
+        if(memberDTO.getMemberId() == "" || memberDTO.getMemberPwd() == "" || memberDTO.getMemberName() == "" || memberDTO.getEmail() == "" || memberDTO.getPhone() == ""){
+            throw new FullInputMemberInfoException("필수 정보를 모두 입력해주세요");
+        }
+
         if(memberMapper.findById(memberDTO.getMemberId()) != null ){
             throw new DuplicatedMemberIdException("이미 가입된 아이디입니다!");
         }
@@ -52,9 +56,6 @@ public class AuthService {
             throw new DuplicatedMemberIdException("이미 가입된 이메일입니다!");
         }
 
-        if(memberDTO.getMemberId() == "" || memberDTO.getMemberPwd() == "" || memberDTO.getEmail() == "" || memberDTO.getPhone() == ""){
-            throw new FullInputMemberInfoException("필수 정보를 모두 입력해주세요");
-        }
 
         memberDTO.setMemberPwd(passwordEncoder.encode(memberDTO.getMemberPwd()));
 
