@@ -41,6 +41,10 @@ public class ProductController {
     public ResponseEntity<ResponseDTO> selectDetailProductByProductCode(@PathVariable String productCode){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 조회 성공",  productService.selectDetailProductByProductCode(productCode)));
     }
+    @GetMapping("/products/name")
+    public ResponseEntity<ResponseDTO> selectProductListByProductName(@RequestParam String productName){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 조회 성공",  productService.selectProductListByProductName(productName)));
+    }
     
     //상품 검색
     @PostMapping("/products/search")

@@ -81,6 +81,12 @@
             count(*)
         FROM TB_BOARDGAME_TYPE
     </select>
+    <select id="selectProductListByProductName" parameterType="String" resultType="ProductDTO">
+        SELECT
+            *
+        FROM TB_BOARDGAME_TYPE A
+        WHERE A.BOARDGAME_NAME LIKE CONCAT('%',CONCAT(#{productName},'%'))
+    </select>
 
     <select id="selectRequiredPartsList" resultType="RequiredPartDTO">
         SELECT
@@ -136,5 +142,12 @@
          #{productImageUrl},
          #{productDetailImageUrl}
          )
+    </insert>
+
+    <insert id="insertPartsList" parameterType="int">
+        INSERT INTO TB_REQUIRED_PARTS_LIST VALUES (SEQ_PARTS_CODE.NEXTVAL, #{productCode}, '카드', 46)
+    </insert>
+    <insert id="insertCheckList" parameterType="int">
+        INSERT INTO TB_DETAIL_INSPECTION_CHECK_lIST VALUES(SEQ_LIST_CODE.NEXTVAL, #{productCode}, '모든 값이 잘 들어가 있는가?')
     </insert>
 </mapper>
