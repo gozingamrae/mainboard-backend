@@ -5,7 +5,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * <pre>
@@ -34,9 +34,9 @@ public class MemberDTO implements UserDetails {
     private String phone;
     private String gender;
     private String job;
-    private java.util.Date birthDateTime;
+    private Date birthDateTime;
     private String loginLock;
-    private java.util.Date  joinDate;
+    private Date  joinDate;
     private String withdrawalMember;
     private Long holdingPoint;
     private String memberRole;
