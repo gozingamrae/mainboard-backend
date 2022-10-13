@@ -14,12 +14,12 @@ public class ProductDTO {
     private String manufacturingCompany;
     private int boardgameCategoryCode;
     private String brand;
-
     private MultipartFile productImage;
-
     private String productImageUrl;
-    private int categoryCode;
 
+    private MultipartFile productDetailImage;
+    private String productDetailImageUrl;
+    private int categoryCode;
     private String categoryName;
     private int SRentalFee;
     private int ARentalFee;
@@ -43,7 +43,9 @@ public class ProductDTO {
                 ", brand='" + brand + '\'' +
                 ", productImage=" + productImage +
                 ", productImageUrl='" + productImageUrl + '\'' +
-                ", categoryCode='" + categoryCode + '\'' +
+                ", productDetailImage=" + productDetailImage +
+                ", productDetailImageUrl='" + productDetailImageUrl + '\'' +
+                ", categoryCode=" + categoryCode +
                 ", categoryName='" + categoryName + '\'' +
                 ", SRentalFee=" + SRentalFee +
                 ", ARentalFee=" + ARentalFee +
@@ -57,15 +59,7 @@ public class ProductDTO {
                 '}';
     }
 
-    public int getBoardgameCategoryCode() {
-        return boardgameCategoryCode;
-    }
-
-    public void setBoardgameCategoryCode(int boardgameCategoryCode) {
-        this.boardgameCategoryCode = boardgameCategoryCode;
-    }
-
-    public ProductDTO(int boardgameTypeCode, int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee, String manufacturingCompany, int boardgameCategoryCode, String brand, MultipartFile productImage, String productImageUrl, int categoryCode,String categoryName, int SRentalFee, int ARentalFee, int BRentalFee, String SState, String AState, String BState, String storage, List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList, List<RequiredPartDTO> requiredPartDTOList) {
+    public ProductDTO(int boardgameTypeCode, int boardgameType, String boardgameName, String soldOutYn, int totalCount, int defaultRentalFee, String manufacturingCompany, int boardgameCategoryCode, String brand, MultipartFile productImage, String productImageUrl, MultipartFile productDetailImage, String productDetailImageUrl, int categoryCode, String categoryName, int SRentalFee, int ARentalFee, int BRentalFee, String SState, String AState, String BState, String storage, List<DetailInspectionCheckListDTO> detailInspectionCheckListDTOList, List<RequiredPartDTO> requiredPartDTOList) {
         this.boardgameTypeCode = boardgameTypeCode;
         this.boardgameType = boardgameType;
         this.boardgameName = boardgameName;
@@ -77,6 +71,8 @@ public class ProductDTO {
         this.brand = brand;
         this.productImage = productImage;
         this.productImageUrl = productImageUrl;
+        this.productDetailImage = productDetailImage;
+        this.productDetailImageUrl = productDetailImageUrl;
         this.categoryCode = categoryCode;
         this.categoryName = categoryName;
         this.SRentalFee = SRentalFee;
@@ -89,6 +85,31 @@ public class ProductDTO {
         this.detailInspectionCheckListDTOList = detailInspectionCheckListDTOList;
         this.requiredPartDTOList = requiredPartDTOList;
     }
+
+    public MultipartFile getProductDetailImage() {
+        return productDetailImage;
+    }
+
+    public void setProductDetailImage(MultipartFile productDetailImage) {
+        this.productDetailImage = productDetailImage;
+    }
+
+    public String getProductDetailImageUrl() {
+        return productDetailImageUrl;
+    }
+
+    public void setProductDetailImageUrl(String productDetailImageUrl) {
+        this.productDetailImageUrl = productDetailImageUrl;
+    }
+
+    public int getBoardgameCategoryCode() {
+        return boardgameCategoryCode;
+    }
+
+    public void setBoardgameCategoryCode(int boardgameCategoryCode) {
+        this.boardgameCategoryCode = boardgameCategoryCode;
+    }
+
 
     public String getProductImageUrl() {
         return productImageUrl;

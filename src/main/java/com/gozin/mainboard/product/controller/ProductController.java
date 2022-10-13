@@ -23,12 +23,11 @@ public class ProductController {
 
     //상품 조회 (paging)
     @GetMapping("/products")
-        public ResponseEntity<ResponseDTO> selectProductListWithPaging(@RequestParam(name="offset", defaultValue="1") String offset) {
+        public ResponseEntity<ResponseDTO> selectProductListWithPaging(@RequestParam(name="offset", defaultValue="1") String offset,@RequestParam(name="limit", defaultValue="10") String limit) {
 
             int totalCount = productService.selectProductTotal();
-            int limit = 10;
             int buttonAmount = 5;
-        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(Integer.parseInt(offset), totalCount, limit, buttonAmount);;
+        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(Integer.parseInt(offset), totalCount, Integer.parseInt(limit), buttonAmount);;
 
         ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
         responseDtoWithPaging.setPageInfo(selectCriteria);
@@ -65,7 +64,7 @@ public class ProductController {
         System.out.println(productDTO);
         System.out.println("hello");
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 등록 성공",  productService.insertProduct(productDTO)));
-}
+    }
 
     //상품 수정
     @PutMapping("/products/{productCode}")

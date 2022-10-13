@@ -4,13 +4,16 @@ server:
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521/xe
+    url: jdbc:oracle:thin:@metaverse.ohgiraffers.com:1521/xe
     username: C##GOZIN
     password: GOZIN
   web:
     resources:
       static-locations: classpath:/productimgs/
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 # 이미지 저장할 위치와 응답할 때 이미지 주소 세팅
 image:
   # WebConfig에 세팅

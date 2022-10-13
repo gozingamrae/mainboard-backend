@@ -88,9 +88,8 @@
         FROM TB_REQUIRED_PARTS_LIST
     </select>
 
-    <select id="selectDetailProductByProductCode"  parameterType="String" resultMap="productResultMap">
+    <select id="selectDetailProductByProductCode"  parameterType="String" resultType="ProductDTO">
         SELECT * FROM TB_BOARDGAME_TYPE A
-        JOIN TB_DETAIL_INSPECTION_CHECK_LIST B ON (A.BOARDGAME_TYPE_CODE = B.BOARDGAME_TYPE_CODE)
         WHERE A.BOARDGAME_TYPE_CODE = #{productCode}
     </select>
     <select id="selectRequiredPartListByProductId" resultType="RequiredPartDTO">
@@ -116,7 +115,7 @@
         , BOARDGAME_CATEGORY_CODE
         , STORAGE
         , PRODUCT_IMAGE_URL
-
+        , PRODUCT_DETAIL_IMAGE_URL
         )
         VALUES(
         SEQ_BOARDGAME_TYPE_CODE.NEXTVAL,
@@ -132,9 +131,10 @@
          '판매중',
          #{brand},
          #{manufacturingCompany},
-         #{categoryCode},
+         #{boardgameCategoryCode},
          #{storage},
-         #{productImageUrl}
+         #{productImageUrl},
+         #{productDetailImageUrl}
          )
     </insert>
 </mapper>

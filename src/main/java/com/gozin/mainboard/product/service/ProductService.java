@@ -31,7 +31,16 @@ public class ProductService {
     }
 
     public Object selectProductListWithPaging(SelectCriteria selectCriteria){
-        return productMapper.selectProductListWithPaging(selectCriteria);
+        List<ProductDTO> productList = productMapper.selectProductListWithPaging(selectCriteria);
+
+        for(int i = 0 ; i < productList.size() ; i++) {
+            productList.get(i).setProductImageUrl(IMAGE_URL + productList.get(i).getProductImageUrl());
+        }
+        for(int i = 0 ; i < productList.size() ; i++) {
+            productList.get(i).setProductDetailImageUrl(IMAGE_URL + productList.get(i).getProductDetailImageUrl());
+        }
+//        log.info("[ProductService] selectProductListWithPaging End ===================================");
+        return productList;
     }
 
     public Object selectProductListWithPagingByProductDTO(SelectCriteria selectCriteria, SearchProductDTO searchProductDTO){
@@ -40,35 +49,38 @@ public class ProductService {
 
 
     public Object selectDetailProductByProductCode(String productCode){
-        System.out.println("call selectDatailProductByProductCode Service 1");
         ProductDTO productDTO = productMapper.selectDetailProductByProductCode(productCode);
-
-        System.out.println("call selectDatailProductByProductCode Service 2");
-        productDTO.setRequiredPartDTOList(productMapper.selectRequiredPartListByProductId());
+        System.out.println(productDTO);
+        productDTO.setProductImageUrl(IMAGE_URL + productDTO.getProductImageUrl());
+        productDTO.setProductDetailImageUrl(IMAGE_URL + productDTO.getProductDetailImageUrl());
         return productDTO;
     }
 
 
     @Transactional
     public String insertProduct(ProductDTO productDto) {
-//        log.info("[ProductService] insertProduct Start ===================================");
-//        log.info("[ProductService] productDto : " + productDto);
         String imageName = UUID.randomUUID().toString().replace("-", "");
         String replaceFileName = null;
+
+        String detailImageName = UUID.randomUUID().toString().replace("-", "");
+        String replaceDetailFileName = null;
+
         int result = 0;
 
         try {
-            System.out.println("test0");
+//          썸네일 이미지 처리
             replaceFileName = FileUploadUtils.saveFile(IMAGE_DIR, imageName, productDto.getProductImage());
-            System.out.println("test1");
             productDto.setProductImageUrl(replaceFileName);
-            System.out.println("test2");
-//            log.info("[ProductService] insert Image Name : ", replaceFileName);
-
+//
+//          상세 정보 이미지 처리
+            replaceDetailFileName = FileUploadUtils.saveFile(IMAGE_DIR, detailImageName, productDto.getProductDetailImage());
+            System.out.println("상세 정보 이미지 : " + replaceDetailFileName);
+            productDto.setProductDetailImageUrl(replaceDetailFileName);
+            
             result = productMapper.insertProduct(productDto);
-            System.out.println("test3");
         } catch (IOException e) {
             FileUploadUtils.deleteFile(IMAGE_DIR, replaceFileName);
+            FileUploadUtils.deleteFile(IMAGE_DIR, replaceDetailFileName);
             throw new RuntimeException(e);
         }
 
