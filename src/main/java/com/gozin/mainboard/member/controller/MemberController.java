@@ -4,6 +4,7 @@ import com.gozin.mainboard.common.ResponseDTO;
 import com.gozin.mainboard.jwt.TokenProvider;
 import com.gozin.mainboard.member.dto.BlacklistDTO;
 import com.gozin.mainboard.member.dto.ChangePwdDTO;
+import com.gozin.mainboard.member.dto.ConditionDTO;
 import com.gozin.mainboard.member.dto.MemberDTO;
 import com.gozin.mainboard.member.service.MemberService;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
  * 2022-10-12         이유리           회원 아이디 찾기 api 수정
  * 2022-10-12         이유리           전체 회원 조회 api 생성
  * 2022-10-12         이유리           블랙리스트 조회, 등록 api 생성
+ * 2022-10-13         이유리           회원 검색 조회 api 생성
  * </pre>
  *
  * @author 이유리
@@ -83,5 +85,11 @@ public class MemberController {
     @GetMapping("/blacklist")
     public ResponseEntity<ResponseDTO> selectBlacklist(){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "블랙리스트 조회 성공", memberService.selectBlacklist()));
+    }
+
+    @PostMapping("/condition")
+    public ResponseEntity<ResponseDTO> selectMembersByCondition(@RequestBody ConditionDTO condition){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "회원 조회 성공!", memberService.selectMembersByCondition(condition)));
+
     }
 }

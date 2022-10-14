@@ -23,4 +23,8 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
     List<OrderDTO> selectOrderList();
+
+    List<OrderDTO> selectOrderByOrderId(String text);
+
+    int insertOrderInfo(OrderDTO orderDTO);
 }

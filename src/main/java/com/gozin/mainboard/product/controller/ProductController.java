@@ -23,12 +23,11 @@ public class ProductController {
 
     //상품 조회 (paging)
     @GetMapping("/products")
-        public ResponseEntity<ResponseDTO> selectProductListWithPaging(@RequestParam(name="offset", defaultValue="1") String offset) {
+        public ResponseEntity<ResponseDTO> selectProductListWithPaging(@RequestParam(name="offset", defaultValue="1") String offset,@RequestParam(name="limit", defaultValue="10") String limit) {
 
             int totalCount = productService.selectProductTotal();
-            int limit = 10;
             int buttonAmount = 5;
-        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(Integer.parseInt(offset), totalCount, limit, buttonAmount);;
+        SelectCriteria selectCriteria = Pagenation.getSelectCriteria(Integer.parseInt(offset), totalCount, Integer.parseInt(limit), buttonAmount);;
 
         ResponseDtoWithPaging responseDtoWithPaging = new ResponseDtoWithPaging();
         responseDtoWithPaging.setPageInfo(selectCriteria);
@@ -41,6 +40,10 @@ public class ProductController {
     @GetMapping("/products/{productCode}")
     public ResponseEntity<ResponseDTO> selectDetailProductByProductCode(@PathVariable String productCode){
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 조회 성공",  productService.selectDetailProductByProductCode(productCode)));
+    }
+    @GetMapping("/products/name")
+    public ResponseEntity<ResponseDTO> selectProductListByProductName(@RequestParam String productName){
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 조회 성공",  productService.selectProductListByProductName(productName)));
     }
     
     //상품 검색
@@ -61,8 +64,9 @@ public class ProductController {
 
     //상품 등록
     @PostMapping("/products")
-    public ResponseEntity<ResponseDTO> insertProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ResponseDTO> insertProduct(@ModelAttribute ProductDTO productDTO) {
         System.out.println(productDTO);
+        System.out.println("hello");
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 등록 성공",  productService.insertProduct(productDTO)));
     }
 
@@ -70,6 +74,7 @@ public class ProductController {
     @PutMapping("/products/{productCode}")
     public ResponseEntity<ResponseDTO> updateProduct(@PathVariable String productCode, @RequestBody ProductDTO productDTO) {
         System.out.println(productDTO);
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 수정 성공",  productService.insertProduct(productDTO)));
+        productService.insertProduct(productDTO);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "상품 수정 성공",  true));
     }
 }
