@@ -75,9 +75,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                     .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+
 //                    .antMatchers("/auth/**").permitAll()
 //                    .antMatchers("/members/**").permitAll()
 //                    .antMatchers("/**").hasAnyRole("ROLE_MEMBER", "ROLE_MEMBER")
+
 
                 .and()
                 .cors()

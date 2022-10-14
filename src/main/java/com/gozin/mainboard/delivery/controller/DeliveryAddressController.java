@@ -93,11 +93,11 @@ public class DeliveryAddressController {
         DeliveryAddressDTO deliveryAddress = new DeliveryAddressDTO();
         deliveryAddress.setAddressName((String) request.get("addressName"));
         deliveryAddress.setAddressPhone((String) request.get("addressPhone"));
-        deliveryAddress.setDeliveryLocation((String) request.get("deliveryLocation"));
+        deliveryAddress.setDeliveryLocation((String) request.get("deliveryLocationTemp"));
         deliveryAddress.setDeliveryRecipient((String) request.get("deliveryRecipient"));
         deliveryAddress.setDefaultAddressYn((String) request.get("defaultAddressYn"));
-        deliveryAddress.setCommonEntranceAccessNumberYn((String) request.get("commonEntranceAccessNumberYn"));
-        deliveryAddress.setCommonEntranceAccessNumber((String) request.get("commonEntranceAccessNumber"));
+        deliveryAddress.setCommonEntranceAccessNumberYn((String) request.get("commonEntranceAccessNumberYnTemp"));
+        deliveryAddress.setCommonEntranceAccessNumber((String) request.get("commonEntranceAccessNumberTemp"));
         deliveryAddress.
                 setAddressLocation(
                         (String)request.get("addressLocation") + "%" +
@@ -121,13 +121,13 @@ public class DeliveryAddressController {
     }
 
     @PutMapping("/addresses")
-    public ResponseEntity<?> updateAddress(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<?> updateAddress(@RequestBody List<Object> request) {
 
-        System.out.println(request.get("defaultAddressYn"));
-
+        System.out.println(((request.get(0))));
+        System.out.println(request.get(1));
         int memberCode = 1;
 
-        if((String) request.get("defaultAddressYn") == "Y") {
+        if("a" == "Y") {
             DeliveryAddressDTO defaultAddress = deliveryAddressService.selectDefaultAddressByMemberCode(memberCode);
             System.out.println("asasasas");
             System.out.println("aaaaaa" + defaultAddress);
@@ -138,19 +138,42 @@ public class DeliveryAddressController {
         }
 
         DeliveryAddressDTO deliveryAddress = new DeliveryAddressDTO();
-        deliveryAddress.setAddressCode((Integer) request.get("addressCode"));
-        deliveryAddress.setAddressName((String) request.get("addressName"));
-        deliveryAddress.setAddressPhone((String) request.get("addressPhone"));
-        deliveryAddress.setDeliveryLocation((String) request.get("deliveryLocation"));
-        deliveryAddress.setDeliveryRecipient((String) request.get("deliveryRecipient"));
-        deliveryAddress.setDefaultAddressYn((String) request.get("defaultAddressYn"));
-        deliveryAddress.setCommonEntranceAccessNumberYn((String) request.get("commonEntranceAccessNumberYn"));
-        deliveryAddress.setCommonEntranceAccessNumber((String) request.get("commonEntranceAccessNumber"));
+        deliveryAddress.setAddressCode((Integer) request.get(1));
+        deliveryAddress.setAddressName((String) ((Map<String, Object>)(request.get(0))).get("addressName")==""?
+                (String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("addressName"):
+                (String) ((Map<String, Object>)request.get(0)).get("addressName"));
+        deliveryAddress.setAddressPhone((String) ((Map<String, Object>)(request.get(0))).get("addressPhone")==""?
+                (String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("addressPhone"):
+                (String) ((Map<String, Object>)(request.get(0))).get("addressPhone"));
+        deliveryAddress.setDeliveryLocation((String) ((Map<String, Object>)(request.get(0))).get("deliveryLocation")==""?
+                (String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("deliveryLocation"):
+                (String) ((Map<String, Object>)(request.get(0))).get("deliveryLocation"));
+        deliveryAddress.setDeliveryRecipient((String) ((Map<String, Object>)(request.get(0))).get("deliveryRecipient")==""?
+                (String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("deliveryRecipient"):
+                (String) ((Map<String, Object>)request.get(0)).get("deliveryRecipient"));
+        deliveryAddress.setDefaultAddressYn((String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("defaultAddressYn")!=
+                        (String) ((Map<String, Object>)(request.get(0))).get("defaultAddressYn")?
+                        (String) ((Map<String, Object>)request.get(0)).get("defaultAddressYn"):
+                        (String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("defaultAddressYn")
+                );
+        deliveryAddress.setCommonEntranceAccessNumberYn((String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("commonEntranceAccessNumberYn")!=
+                        (String) ((Map<String, Object>)(request.get(0))).get("commonEntranceAccessNumberYn")?
+                        (String) ((Map<String, Object>)(request.get(0))).get("commonEntranceAccessNumberYn"):
+                        (String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("commonEntranceAccessNumberYn")
+                );
+        deliveryAddress.setCommonEntranceAccessNumber((String) ((Map<String, Object>)(request.get(0))).get("commonEntranceAccessNumber")==""?
+                (String) ((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("commonEntranceAccessNumber"):
+                (String) ((Map<String, Object>)(request.get(0))).get("commonEntranceAccessNumber"));
         deliveryAddress.
                 setAddressLocation(
-                        (String)request.get("addressLocation") + "%" +
-                                (String)request.get("addressDetailLocation") + "%" +
-                                (String)request.get("addressZipCode")
+                        (String)((Map<String, Object>)(request.get(0))).get("addressZipCode")==""?
+
+                        (String)((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("addressLocation") + "%" +
+                                (String)((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("addressDetailLocation") + "%" +
+                                (String)((Map<String, Object>)((Map<String, Object>)request.get(0)).get("addressList")).get("addressZipCode"):
+                                (String)((Map<String, Object>)(request.get(0))).get("addressLocation") + "%" +
+                                        (String)((Map<String, Object>)(request.get(0))).get("addressDetailLocation") + "%" +
+                                        (String)((Map<String, Object>)(request.get(0))).get("addressZipCode")
                 );
 
         System.out.println(deliveryAddress);
