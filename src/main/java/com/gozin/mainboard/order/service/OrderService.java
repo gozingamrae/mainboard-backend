@@ -78,7 +78,7 @@ public class OrderService {
     }
 
     public Object insertOrderInfo(OrderDTO orderDTO) {
-
+        System.out.println("orderDTO = " + orderDTO);
        int insertOrderInfo = orderMapper.insertOrderInfo(orderDTO);
 
        return (insertOrderInfo>0) ? "입력 성공!" : "입력 실패ㅜ";
